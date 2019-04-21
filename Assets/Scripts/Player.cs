@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int PlayerId;
     new Rigidbody rigidbody;
     [SerializeField] Transform TakePoint;
     DyeObject takeDye;
@@ -19,15 +20,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         MoveUpdate();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(PlayerId == 1 ? KeyCode.B : KeyCode.Keypad1))
         {
             if (takeDye == null)
                 Take();
             else
                 Pun();
         }
-        if (Input.GetKey(KeyCode.C) && takeDye == null)
+        if (Input.GetKey(PlayerId == 1 ? KeyCode.N : KeyCode.Keypad2) && takeDye == null)
         {
+
             Work();
         }
     }
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
         RaycastHit hit;
-        if (Physics.SphereCast(ray, 0.3f, out hit, Mathf.Infinity))
+        if (Physics.SphereCast(ray, 0.3f, out hit, 1))
         {
             if (hit.transform.CompareTag("DyeCube") && hit.transform.name == "ToolTable")
             {
@@ -49,7 +51,10 @@ public class Player : MonoBehaviour
 
     void MoveUpdate()
     {
-        Vector3 targerPosition = transform.position + new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        float x = Mathf.Round(Input.GetAxis("Player" + PlayerId.ToString() + "Horizontal"));
+        float y = Mathf.Round(Input.GetAxis("Player" + PlayerId.ToString() + "Vertical"));
+
+        Vector3 targerPosition = transform.position + new Vector3(x, 0, y);
         rigidbody.MovePosition(Vector3.MoveTowards(transform.position, targerPosition, speed * Time.deltaTime));
         transform.LookAt(targerPosition, Vector3.up);
     }
@@ -59,7 +64,7 @@ public class Player : MonoBehaviour
 
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
         RaycastHit hit;
-        if (Physics.SphereCast(ray, 0.3f, out hit, Mathf.Infinity))
+        if (Physics.SphereCast(ray, 0.3f, out hit, 1))
         {
             if (hit.transform.CompareTag("DyeCube"))
             {
@@ -79,9 +84,22 @@ public class Player : MonoBehaviour
     void Pun()
     {
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
-        RaycastHit hit;
-        if (Physics.SphereCast(ray, 0.3f, out hit, Mathf.Infinity))
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 0.3f, transform.TransformDirection(Vector3.forward), 1);
+
+
+        int index = -1;
+        for (int i = 0; i < hits.Length; i++)
         {
+            if (hits[i].transform == takeDye.transform || transform == hits[i].transform)
+                continue;
+
+            index = i;
+            break;
+        }
+
+        if (index != -1)
+        {
+            RaycastHit hit = hits[index];
             if (hit.transform.CompareTag("DyeCube"))
             {
                 DyeCube cube = hit.transform.GetComponent<DyeCube>();
@@ -90,7 +108,8 @@ public class Player : MonoBehaviour
             }
             if (hit.transform.CompareTag("DyeObject"))
             {
-                if (hit.transform.name == "Pot" && hit.transform.GetComponent<DyePot>().AddCuisine(takeDye))
+                DyeObject dyeHit = hit.transform.GetComponent<DyeObject>();
+                if (dyeHit.type == DyeType.Pot && (dyeHit as DyePot).Fusion(takeDye))
                     takeDye = null;
             }
         }

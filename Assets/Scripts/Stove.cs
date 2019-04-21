@@ -6,7 +6,7 @@ public class Stove : DyeCube
 {
     public override bool Put(DyeObject obj)
     {
-        if (obj.name == "Pot")
+        if (obj.type == DyeType.Pot)
         {
             if (base.Put(obj))
             {
@@ -14,9 +14,10 @@ public class Stove : DyeCube
                 return true;
             }
         }
-        else if (obj.name == "Dye" && ObjectOnDesk != null && ObjectOnDesk.name == "Pot")
+        else if (ObjectOnDesk != null && ObjectOnDesk.type == DyeType.Pot)
         {
-            return ((DyePot)ObjectOnDesk).AddCuisine(obj);
+
+            return ((DyePot)ObjectOnDesk).Fusion(obj);
         }
         return false;
     }

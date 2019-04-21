@@ -21,7 +21,6 @@ public class DyeCube : MonoBehaviour
             DyeObject obj = ObjectOnDesk;
             ObjectOnDesk = null;
             return obj;
-
         }
         return null;
     }
@@ -34,6 +33,7 @@ public class DyeCube : MonoBehaviour
             obj.Mounting(DeskTransform);
             return true;
         }
+        ObjectOnDesk.Fusion(obj);
         return false;
     }
 }
