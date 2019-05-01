@@ -13,21 +13,31 @@ public enum DyeType : int
     Pot,
     Plate
 }
+
 public class DyeObject : MonoBehaviour
 {
     [SerializeField] protected RectTransform UIRectTransform;
     [SerializeField] protected Image fillImage;
 
-
     public DyeType type;
+
+    float processValue = 0;
+    public bool IsProcessFinish { get { return processValue >= 1; } }
+
     public bool CanChop = false;
-    float chopValue = 0;
-    public bool ChopFinish { get { return chopValue >= 1; } }
     public void Chop()
     {
-        if (ChopFinish)
+        if (IsProcessFinish)
             return;
-        chopValue += Time.deltaTime;
+        processValue += Time.deltaTime;
+    }
+
+    public bool CanPestled = false;
+    public void Pestling()
+    {
+        if (IsProcessFinish)
+            return;
+        processValue += Time.deltaTime;
     }
 
     [SerializeField] new Collider collider;
@@ -42,9 +52,9 @@ public class DyeObject : MonoBehaviour
     {
         if (fillImage != null)
         {
-            if (CanChop)
+            if (CanChop || CanPestled)
             {
-                fillImage.fillAmount = chopValue / 1f;
+                fillImage.fillAmount = processValue / 1f;
             }
 
             if (fillImage.fillAmount > 0 && fillImage.fillAmount < 1)
@@ -68,6 +78,11 @@ public class DyeObject : MonoBehaviour
         rigidbody.isKinematic = true;
         if (fillImage != null)
             fillImage.fillAmount = 0;
+
+        if (CanChop || CanPestled)
+            processValue = 0;
+        else
+            processValue = 1;
     }
 
     virtual public void Mounting(Transform parent)

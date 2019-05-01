@@ -10,13 +10,28 @@ public class RecipeContainer : MonoBehaviour
         {
             {"Yellow", new DyeType[]{ DyeType.Cloth, DyeType.Yellow} },
             {"Blue", new DyeType[]{ DyeType.Cloth, DyeType.Blue} },
+            {"Red", new DyeType[]{ DyeType.Cloth, DyeType.Red} }
         };
 
     Dictionary<string, DyeType[]> normalLevelcandidateRecipe = new Dictionary<string, DyeType[]>()
         {
-            {"Green", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Blue } },
+            {"Yellow_Blue", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Blue } },
+            {"Yellow_Red", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Red } },
+            {"Blue_Red", new DyeType[]{ DyeType.Cloth, DyeType.Blue, DyeType.Red } },
+            {"Blue_Blue", new DyeType[]{ DyeType.Cloth, DyeType.Blue, DyeType.Blue } },
+            {"Red_Red", new DyeType[]{ DyeType.Cloth, DyeType.Red, DyeType.Red } },
+            {"Yellow_Yellow", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Yellow } }
         };
-
+    Dictionary<string, DyeType[]> hardLevelcandidateRecipe = new Dictionary<string, DyeType[]>()
+        {
+            {"Yellow_Yellow_Red", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Yellow, DyeType.Red } },
+            {"Yellow_Yellow_Blue", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Yellow, DyeType.Blue } },
+            {"Yellow_Red_Red", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Red, DyeType.Red } },
+            {"Yellow_Blue_Blue", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Blue, DyeType.Blue } },
+            {"Blue_Blue_Red", new DyeType[]{ DyeType.Cloth, DyeType.Blue, DyeType.Blue, DyeType.Red } },
+            {"Blue_Red_Red", new DyeType[]{ DyeType.Cloth, DyeType.Blue, DyeType.Red, DyeType.Red } },
+            {"Yellow_Blue_Red", new DyeType[]{ DyeType.Cloth, DyeType.Yellow, DyeType.Blue, DyeType.Red } }
+        };
     List<RecipeUI> recipes = new List<RecipeUI>();
     [SerializeField] RecipeUI recipePrefab;
 
@@ -37,17 +52,26 @@ public class RecipeContainer : MonoBehaviour
     }
 
     float normalRate = 0;
+    float hardRate = 0;
     public bool AddRecipeOrder()
     {
         if (recipes.Count <= 5)
         {
-            if (Random.Range(0, 1) < normalRate)
+            if (Random.Range(0, 1) < hardRate)
             {
+                hardRate = 0;
+                normalRate += (1 / 4f);
+                CreateRecipeOrder(hardLevelcandidateRecipe);
+            }
+            else if (Random.Range(0, 1) < normalRate)
+            {
+                hardRate += (1 / 8f);
                 normalRate = 0;
                 CreateRecipeOrder(normalLevelcandidateRecipe);
             }
             else
             {
+                hardRate += (1 / 8f);
                 normalRate += (1 / 4f);
                 CreateRecipeOrder(easyLevelcandidateRecipe);
             }
@@ -59,7 +83,7 @@ public class RecipeContainer : MonoBehaviour
 
     void CreateRecipeOrder(Dictionary<string, DyeType[]> candidateRecipe)
     {
-        var recipesData = easyLevelcandidateRecipe.ElementAt(Random.Range(0, candidateRecipe.Count));
+        var recipesData = candidateRecipe.ElementAt(Random.Range(0, candidateRecipe.Count));
         RecipeUI recipeUI = Instantiate(recipePrefab, transform);
         recipes.Add(recipeUI);
         recipeUI.SetRecipe(recipesData.Key, recipesData.Value);

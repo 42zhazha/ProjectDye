@@ -315,7 +315,7 @@ MonoBehaviour:
   UIRectTransform: {fileID: 224935307138282308}
   fillImage: {fileID: 114700732955337274}
   type: 1000
-  CanChop: 0
+  CanChop: 1
   collider: {fileID: 65493076200968848}
   rigidbody: {fileID: 54900301467863740}
 --- !u!222 &222858310573097290

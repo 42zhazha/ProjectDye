@@ -40,10 +40,10 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(ray, 0.3f, out hit, 1))
         {
-            if (hit.transform.CompareTag("DyeCube") && hit.transform.name == "ToolTable")
+            if (hit.transform.CompareTag("DyeCube"))
             {
                 ToolTable toolTable = hit.transform.GetComponent<ToolTable>();
-                if (toolTable.CanWork)
+                if (toolTable != null && toolTable.CanWork)
                     toolTable.Work();
             }
         }
