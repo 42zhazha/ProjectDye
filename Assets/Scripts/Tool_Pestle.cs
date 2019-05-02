@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class Tool_Pestle : ToolTable
 {
-    public override void Work()
+    public override string Work()
     {
         if (ObjectOnDesk.CanPestled)
         {
             ObjectOnDesk.Pestling();
+            return "Pestle";
         }
+        return "";
     }
 }

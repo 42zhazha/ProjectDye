@@ -5,5 +5,5 @@ using UnityEngine;
 abstract public class ToolTable : DyeCube
 {
     public bool CanWork { get { return ObjectOnDesk != null; } }
-    abstract public void Work();
+    abstract public string Work();
 }

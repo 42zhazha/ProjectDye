@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class Tool_ChoppingBoard : ToolTable
 {
-    public override void Work()
+    public override string Work()
     {
         if (ObjectOnDesk.CanChop)
         {
             ObjectOnDesk.Chop();
+            return "Chop";
         }
+        return "";
     }
 }

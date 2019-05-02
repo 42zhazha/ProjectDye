@@ -7,9 +7,19 @@ public class Player : MonoBehaviour
     public int PlayerId;
     new Rigidbody rigidbody;
     [SerializeField] Transform TakePoint;
-    DyeObject takeDye;
+    [SerializeField] Animator animator;
+    DyeObject _takeDye;
+    DyeObject TakeDye
+    {
+        get { return _takeDye; }
+        set
+        {
+            _takeDye = value;
+            animator.SetBool("IsHolding", _takeDye != null);
+        }
+    }
 
-    float speed = 8;
+    float speed = 5;
     // Use this for initialization
     void Awake()
     {
@@ -22,21 +32,24 @@ public class Player : MonoBehaviour
         MoveUpdate();
         if (Input.GetKeyDown(PlayerId == 1 ? KeyCode.B : KeyCode.Keypad1))
         {
-            if (takeDye == null)
+            if (TakeDye == null)
                 Take();
             else
                 Pun();
         }
-        if (Input.GetKey(PlayerId == 1 ? KeyCode.N : KeyCode.Keypad2) && takeDye == null)
+        if (Input.GetKey(PlayerId == 1 ? KeyCode.N : KeyCode.Keypad2) && TakeDye == null)
         {
-
             Work();
+        }
+        else
+        {
+            animator.SetFloat("WorkAction", 0f);
         }
     }
 
     void Work()
     {
-        Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
+        Ray ray = new Ray(transform.position - new Vector3(0, 0.25f, 0), transform.TransformDirection(Vector3.forward));
         RaycastHit hit;
         if (Physics.SphereCast(ray, 0.3f, out hit, 1))
         {
@@ -44,7 +57,18 @@ public class Player : MonoBehaviour
             {
                 ToolTable toolTable = hit.transform.GetComponent<ToolTable>();
                 if (toolTable != null && toolTable.CanWork)
-                    toolTable.Work();
+                {
+                    string action = toolTable.Work();
+                    switch (action)
+                    {
+                        case "Pestle":
+                            animator.SetFloat("WorkAction", 0.5f);
+                            break;
+                        case "Chop":
+                            animator.SetFloat("WorkAction", 1f);
+                            break;
+                    }
+                }
             }
         }
     }
@@ -54,28 +78,37 @@ public class Player : MonoBehaviour
         float x = Mathf.Round(Input.GetAxis("Player" + PlayerId.ToString() + "Horizontal"));
         float y = Mathf.Round(Input.GetAxis("Player" + PlayerId.ToString() + "Vertical"));
 
-        Vector3 targerPosition = transform.position + new Vector3(x, 0, y);
-        rigidbody.MovePosition(Vector3.MoveTowards(transform.position, targerPosition, speed * Time.deltaTime));
-        transform.LookAt(targerPosition, Vector3.up);
+
+        if (x == 0 && y == 0)
+        {
+            animator.SetBool("IsMove", false);
+        }
+        else
+        {
+            animator.SetBool("IsMove", true);
+            Vector3 targerPosition = transform.position + new Vector3(x, 0, y);
+            rigidbody.MovePosition(Vector3.MoveTowards(transform.position, targerPosition, speed * Time.deltaTime));
+            transform.LookAt(targerPosition, Vector3.up);
+        }
     }
 
     void Take()
     {
 
-        Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
+        Ray ray = new Ray(transform.position - new Vector3(0, 0.25f, 0), transform.TransformDirection(Vector3.forward));
         RaycastHit hit;
         if (Physics.SphereCast(ray, 0.3f, out hit, 1))
         {
             if (hit.transform.CompareTag("DyeCube"))
             {
-                takeDye = hit.transform.GetComponent<DyeCube>().Take();
-                if (takeDye != null)
-                    takeDye.Mounting(TakePoint);
+                TakeDye = hit.transform.GetComponent<DyeCube>().Take();
+                if (TakeDye != null)
+                    TakeDye.Mounting(TakePoint);
             }
             else if (hit.transform.CompareTag("DyeObject"))
             {
-                takeDye = hit.transform.GetComponent<DyeObject>();
-                takeDye.Mounting(TakePoint);
+                TakeDye = hit.transform.GetComponent<DyeObject>();
+                TakeDye.Mounting(TakePoint);
             }
         }
 
@@ -83,14 +116,14 @@ public class Player : MonoBehaviour
 
     void Pun()
     {
-        Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
+        Ray ray = new Ray(transform.position - new Vector3(0, 0.25f, 0), transform.TransformDirection(Vector3.forward));
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, 0.3f, transform.TransformDirection(Vector3.forward), 1);
 
 
         int index = -1;
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i].transform == takeDye.transform || transform == hits[i].transform)
+            if (hits[i].transform == TakeDye.transform || transform == hits[i].transform)
                 continue;
 
             index = i;
@@ -103,20 +136,20 @@ public class Player : MonoBehaviour
             if (hit.transform.CompareTag("DyeCube"))
             {
                 DyeCube cube = hit.transform.GetComponent<DyeCube>();
-                if (cube.Put(takeDye))
-                    takeDye = null;
+                if (cube.Put(TakeDye))
+                    TakeDye = null;
             }
             if (hit.transform.CompareTag("DyeObject"))
             {
                 DyeObject dyeHit = hit.transform.GetComponent<DyeObject>();
-                if (dyeHit.type == DyeType.Pot && (dyeHit as DyePot).Fusion(takeDye))
-                    takeDye = null;
+                if (dyeHit.type == DyeType.Pot && (dyeHit as DyePot).Fusion(TakeDye))
+                    TakeDye = null;
             }
         }
         else
         {
-            takeDye.Mounting(null);
-            takeDye = null;
+            TakeDye.Mounting(null);
+            TakeDye = null;
         }
     }
 }
