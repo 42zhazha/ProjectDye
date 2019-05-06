@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    [SerializeField] Transform toolPoint;
+
+
     float speed = 5;
     // Use this for initialization
     void Awake()
@@ -26,23 +29,30 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
+    ToolTable toolTable;
     // Update is called once per frame
     void Update()
     {
         MoveUpdate();
-        if (Input.GetKeyDown(PlayerId == 1 ? KeyCode.B : KeyCode.Keypad1))
+        if (Input.GetButtonDown("Player" + PlayerId.ToString() + "Button4"))
         {
             if (TakeDye == null)
                 Take();
             else
                 Pun();
         }
-        if (Input.GetKey(PlayerId == 1 ? KeyCode.N : KeyCode.Keypad2) && TakeDye == null)
+
+        if (Input.GetButton("Player" + PlayerId.ToString() + "Button3"))
         {
             Work();
         }
         else
         {
+            if (this.toolTable != null)
+            {
+                this.toolTable.PutBackTool(toolPoint.GetChild(1).gameObject);
+                this.toolTable = null;
+            }
             animator.SetFloat("WorkAction", 0f);
         }
     }
@@ -58,7 +68,21 @@ public class Player : MonoBehaviour
                 ToolTable toolTable = hit.transform.GetComponent<ToolTable>();
                 if (toolTable != null && toolTable.CanWork)
                 {
+                    if (toolTable != this.toolTable)
+                    {
+                        if (this.toolTable != null)
+                        {
+                            this.toolTable.PutBackTool(toolPoint.GetChild(1).gameObject);
+                        }
+                        this.toolTable = toolTable;
+                        GameObject tool = toolTable.PickUpTool();
+                        tool.transform.SetParent(toolPoint);
+                        tool.transform.localPosition = Vector3.zero;
+                        tool.transform.localEulerAngles = Vector3.zero;
+                    }
+
                     string action = toolTable.Work();
+                    transform.LookAt(new Vector3(toolTable.transform.position.x, transform.position.y, toolTable.transform.position.z));
                     switch (action)
                     {
                         case "Pestle":
@@ -77,8 +101,6 @@ public class Player : MonoBehaviour
     {
         float x = Mathf.Round(Input.GetAxis("Player" + PlayerId.ToString() + "Horizontal"));
         float y = Mathf.Round(Input.GetAxis("Player" + PlayerId.ToString() + "Vertical"));
-
-
         if (x == 0 && y == 0)
         {
             animator.SetBool("IsMove", false);
@@ -94,7 +116,6 @@ public class Player : MonoBehaviour
 
     void Take()
     {
-
         Ray ray = new Ray(transform.position - new Vector3(0, 0.25f, 0), transform.TransformDirection(Vector3.forward));
         RaycastHit hit;
         if (Physics.SphereCast(ray, 0.3f, out hit, 1))
@@ -103,15 +124,18 @@ public class Player : MonoBehaviour
             {
                 TakeDye = hit.transform.GetComponent<DyeCube>().Take();
                 if (TakeDye != null)
+                {
                     TakeDye.Mounting(TakePoint);
+                    TakeDye.transform.localEulerAngles = Vector3.zero;
+                }
             }
             else if (hit.transform.CompareTag("DyeObject"))
             {
                 TakeDye = hit.transform.GetComponent<DyeObject>();
                 TakeDye.Mounting(TakePoint);
+                TakeDye.transform.localEulerAngles = Vector3.zero;
             }
         }
-
     }
 
     void Pun()

@@ -18,11 +18,18 @@ ModelImporter:
     400010: RedBug_joint4
     400012: RedBug_joint5
     2100000: pasted__RedBug_UV
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: RedBug
     7400000: RedBug_Idle
     9500000: //RootNode
     13700000: RedBug 1
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedBug_UV
+    second: {fileID: 2100000, guid: d2a40aa735f0b4c479e34b51cc9dd13e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -73,7 +80,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    previousCalculatedGlobalScale: 0.012999999
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    bool[] isConnect = new bool[2] { false, false };
     public static GameManager Instance;
     public RecipeContainer recipeContainer;
     private void Awake()
@@ -17,11 +18,32 @@ public class GameManager : MonoBehaviour
         Invoke("AddRecipeOrder", 2);
     }
 
+    private void Update()
+    {
+        if (isConnect[0] == false && Input.GetButtonDown("Player1StartButton"))
+        {
+            isConnect[0] = true;
+            AddPlayer(1);
+        }
+        else if (isConnect[1] == false && Input.GetButtonDown("Player2StartButton"))
+        {
+            isConnect[1] = true;
+            AddPlayer(2);
+        }
+    }
+
+    void AddPlayer(int id)
+    {
+        GameObject obj = Instantiate(Resources.Load<GameObject>("Prefab/Player"));
+        obj.GetComponent<Player>().PlayerId = id;
+    }
+
     void AddRecipeOrder()
     {
         if (recipeContainer.AddRecipeOrder())
             Invoke("AddRecipeOrder", 8);
     }
+
     [SerializeField] Text coinText;
     int coid = 0;
 
@@ -34,7 +56,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+            //送錯菜單
         }
     }
 }

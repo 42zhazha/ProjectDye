@@ -6,6 +6,7 @@ using System.Linq;
 
 public class RecipeContainer : MonoBehaviour
 {
+    public int level = 1;
     Dictionary<string, DyeType[]> easyLevelcandidateRecipe = new Dictionary<string, DyeType[]>()
         {
             {"Yellow", new DyeType[]{ DyeType.Cloth, DyeType.Yellow} },
@@ -55,24 +56,27 @@ public class RecipeContainer : MonoBehaviour
     float hardRate = 0;
     public bool AddRecipeOrder()
     {
+
+        // 判斷等級
+
         if (recipes.Count <= 5)
         {
-            if (Random.Range(0, 1) < hardRate)
+            if (Random.Range(0f, 1f) < hardRate)
             {
                 hardRate = 0;
-                normalRate += (1 / 4f);
+                normalRate += 0.5f;
                 CreateRecipeOrder(hardLevelcandidateRecipe);
             }
-            else if (Random.Range(0, 1) < normalRate)
+            else if (Random.Range(0f, 1f) < normalRate)
             {
-                hardRate += (1 / 8f);
+                hardRate += 0.1f;
                 normalRate = 0;
                 CreateRecipeOrder(normalLevelcandidateRecipe);
             }
             else
             {
-                hardRate += (1 / 8f);
-                normalRate += (1 / 4f);
+                hardRate += 0.1f;
+                normalRate += 0.5f;
                 CreateRecipeOrder(easyLevelcandidateRecipe);
             }
             return true;

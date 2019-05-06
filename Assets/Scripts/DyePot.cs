@@ -37,6 +37,11 @@ public class DyePot : DyeObject
         {
             GameObject.DestroyImmediate(cuisinePoint.GetChild(0).gameObject);
         }
+        childs = additivePoint.childCount;
+        for (int i = childs - 1; i >= 0; i--)
+        {
+            GameObject.DestroyImmediate(additivePoint.GetChild(0).gameObject);
+        }
     }
 
     override protected void Update()

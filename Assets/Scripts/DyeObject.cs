@@ -16,6 +16,7 @@ public enum DyeType : int
 
 public class DyeObject : MonoBehaviour
 {
+    private Vector3 offset = Vector3.zero;
     [SerializeField] protected RectTransform UIRectTransform;
     [SerializeField] protected Image fillImage;
 
