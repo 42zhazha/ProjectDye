@@ -15,7 +15,16 @@ public class Player : MonoBehaviour
         set
         {
             _takeDye = value;
-            animator.SetBool("IsHolding", _takeDye != null);
+            float id = 1;
+            if (_takeDye == null)
+                id = 0;
+            else if (_takeDye is Plate)
+                id = 1;
+            else if (_takeDye is DyePot)
+                id = 2;
+            else
+                id = 3;
+            animator.SetFloat("HoldingID", id);
         }
     }
 
