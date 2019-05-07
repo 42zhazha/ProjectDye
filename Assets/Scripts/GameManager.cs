@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Com.LuisPedroFonseca.ProCamera2D;
 public class GameManager : MonoBehaviour
 {
     bool[] isConnect = new bool[2] { false, false };
     public static GameManager Instance;
     public RecipeContainer recipeContainer;
+
     private void Awake()
     {
         Instance = this;
     }
-    // Use this for initialization
+
     void Start()
     {
         Invoke("AddRecipeOrder", 2);
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject obj = Instantiate(Resources.Load<GameObject>("Prefab/Player"));
         obj.GetComponent<Player>().PlayerId = id;
+        Camera.main.GetComponent<ProCamera2D>().AddCameraTarget(obj.transform, 1, 1, 0, new Vector2(-6f, -15f));
     }
 
     void AddRecipeOrder()

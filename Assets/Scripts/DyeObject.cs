@@ -26,19 +26,21 @@ public class DyeObject : MonoBehaviour
     public bool IsProcessFinish { get { return processValue >= 1; } }
 
     public bool CanChop = false;
-    public void Chop()
+    public bool Chop()
     {
         if (IsProcessFinish)
-            return;
+            return false;
         processValue += Time.deltaTime;
+        return true;
     }
 
     public bool CanPestled = false;
-    public void Pestling()
+    public bool Pestling()
     {
         if (IsProcessFinish)
-            return;
+            return false;
         processValue += Time.deltaTime;
+        return true;
     }
 
     [SerializeField] new Collider collider;

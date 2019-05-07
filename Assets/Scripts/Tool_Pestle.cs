@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class Tool_Pestle : ToolTable
 {
-    public override string Work()
+    public override bool Work()
     {
-        if (ObjectOnDesk.CanPestled)
+        if (ObjectOnDesk.CanPestled && ObjectOnDesk.Pestling())
         {
-            ObjectOnDesk.Pestling();
-            return "Pestle";
+            return true;
         }
-        return "";
+        return false;
     }
 }

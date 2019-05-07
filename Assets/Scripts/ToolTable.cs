@@ -7,7 +7,7 @@ abstract public class ToolTable : DyeCube
     [SerializeField] Transform tool;
     public int workerCount = 0;
     public bool CanWork { get { return ObjectOnDesk != null; } }
-    abstract public string Work();
+    abstract public bool Work();
     public GameObject PickUpTool()
     {
         workerCount++;

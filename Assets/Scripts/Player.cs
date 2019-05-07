@@ -42,22 +42,35 @@ public class Player : MonoBehaviour
                 Pun();
         }
 
-        if (Input.GetButton("Player" + PlayerId.ToString() + "Button3"))
+        if (Input.GetButtonDown("Player" + PlayerId.ToString() + "Button3"))
         {
-            Work();
+            PickUpTool();
         }
-        else
+
+        else if (Input.GetButtonUp("Player" + PlayerId.ToString() + "Button3"))
         {
             if (this.toolTable != null)
             {
                 this.toolTable.PutBackTool(toolPoint.GetChild(1).gameObject);
                 this.toolTable = null;
             }
-            animator.SetFloat("WorkAction", 0f);
+            animator.SetBool("IsWorking", false);
+        }
+        else if (Input.GetButton("Player" + PlayerId.ToString() + "Button3"))
+        {
+            if (this.toolTable != null && toolTable.Work())
+            {
+                animator.SetBool("IsWorking", true);
+            }
+            else
+
+                animator.SetBool("IsWorking", false);
         }
     }
 
-    void Work()
+
+
+    void PickUpTool()
     {
         Ray ray = new Ray(transform.position - new Vector3(0, 0.25f, 0), transform.TransformDirection(Vector3.forward));
         RaycastHit hit;
@@ -66,7 +79,7 @@ public class Player : MonoBehaviour
             if (hit.transform.CompareTag("DyeCube"))
             {
                 ToolTable toolTable = hit.transform.GetComponent<ToolTable>();
-                if (toolTable != null && toolTable.CanWork)
+                if (toolTable != null && toolTable.CanWork && toolTable.Work())
                 {
                     if (toolTable != this.toolTable)
                     {
@@ -80,18 +93,8 @@ public class Player : MonoBehaviour
                         tool.transform.localPosition = Vector3.zero;
                         tool.transform.localEulerAngles = Vector3.zero;
                     }
-
-                    string action = toolTable.Work();
+                    animator.SetBool("IsWorking ", true);
                     transform.LookAt(new Vector3(toolTable.transform.position.x, transform.position.y, toolTable.transform.position.z));
-                    switch (action)
-                    {
-                        case "Pestle":
-                            animator.SetFloat("WorkAction", 0.5f);
-                            break;
-                        case "Chop":
-                            animator.SetFloat("WorkAction", 1f);
-                            break;
-                    }
                 }
             }
         }
