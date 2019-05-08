@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Plate : DyeObject
 {
-    [SerializeField] Transform recipePoint;
+    [SerializeField] GameObject Cloth;
     public string recipeName { get; private set; }
     protected override void Awake()
     {
@@ -14,20 +14,14 @@ public class Plate : DyeObject
     public void SetRecipe(string recipe)
     {
         recipeName = recipe;
-        if (recipeName != "")
-        {
-            GameObject cuisine = Instantiate(Resources.Load<GameObject>("Prefab/Cylinder/" + recipeName), recipePoint);
-            cuisine.transform.localPosition = Vector3.zero;
-        }
+        Cloth.SetActive(true);
+        Cloth.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Prefab/Cylinder/" + recipeName);
+
     }
 
     public void Clean()
     {
         recipeName = "";
-        int childs = recipePoint.childCount;
-        for (int i = childs - 1; i >= 0; i--)
-        {
-            GameObject.DestroyImmediate(recipePoint.GetChild(0).gameObject);
-        }
+        Cloth.SetActive(false);
     }
 }

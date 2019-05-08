@@ -1,35 +1,36 @@
 fileFormatVersion: 2
-guid: 6523d63d4dec6804e90d3f2a6e24a6d4
+guid: 48fb3eb8329260f468ca1585787f259d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: RedBug 1
-    100004: RedBug_joint1
-    100006: RedBug_joint2
-    100008: RedBug_joint3
-    100010: RedBug_joint4
-    100012: RedBug_joint5
-    400000: //RootNode
-    400002: RedBug 1
-    400004: RedBug_joint1
-    400006: RedBug_joint2
-    400008: RedBug_joint3
-    400010: RedBug_joint4
-    400012: RedBug_joint5
-    2100000: pasted__RedBug_UV
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: RedBug
-    7400000: RedBug_Idle
+    100000: Lonicera1
+    100002: Lonicera2
+    100004: Lonicera3
+    100006: Lonicera4
+    100008: //RootNode
+    400000: Lonicera1
+    400002: Lonicera2
+    400004: Lonicera3
+    400006: Lonicera4
+    400008: //RootNode
+    2100000: Lonicera_UV
+    2300000: Lonicera1
+    2300002: Lonicera2
+    2300004: Lonicera3
+    2300006: Lonicera4
+    3300000: Lonicera1
+    3300002: Lonicera2
+    3300004: Lonicera3
+    3300006: Lonicera4
+    4300000: Lonicera4
+    4300002: Lonicera3
+    4300004: Lonicera2
+    4300006: Lonicera1
+    7400000: Lonicera_Idle
+    7400002: Lonicera_Cutting
+    7400004: Lonicera_Cutted
     9500000: //RootNode
-    13700000: RedBug 1
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: RedBug_UV
-    second: {fileID: 2100000, guid: d2a40aa735f0b4c479e34b51cc9dd13e, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -80,7 +81,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.012999999
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

@@ -22,7 +22,7 @@ public class DyeObject : MonoBehaviour
 
     public DyeType type;
 
-    float processValue = 0;
+    protected float processValue = 0;
     public bool IsProcessFinish { get { return processValue >= 1; } }
 
     public bool CanChop = false;

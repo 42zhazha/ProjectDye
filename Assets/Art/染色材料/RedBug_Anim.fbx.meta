@@ -1,20 +1,34 @@
 fileFormatVersion: 2
-guid: cca29a458f2d7de4ea47bf0994265557
+guid: e08da09b2a69e7943b065895a9f90c0c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: DyesTool_UV
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sifter
+    100000: RedBug 1
+    100002: //RootNode
+    100004: RedBug_joint1
+    100006: RedBug_joint2
+    100008: RedBug_joint3
+    100010: RedBug_joint4
+    100012: RedBug_joint5
+    400000: RedBug 1
+    400002: //RootNode
+    400004: RedBug_joint1
+    400006: RedBug_joint2
+    400008: RedBug_joint3
+    400010: RedBug_joint4
+    400012: RedBug_joint5
+    2100000: RedBug_UV
+    4300000: RedBug
+    7400000: RedBug_Idle
+    7400002: Turmeric_Cutting
+    9500000: //RootNode
+    13700000: RedBug 1
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: DyesTool_UV
-    second: {fileID: 2100000, guid: f6717c750ec6d2140ae9ab9c295d0d40, type: 2}
+      name: RedBug_UV
+    second: {fileID: 2100000, guid: d2a40aa735f0b4c479e34b51cc9dd13e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -45,7 +59,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 15
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -65,8 +79,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -90,7 +104,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

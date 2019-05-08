@@ -1,30 +1,25 @@
 fileFormatVersion: 2
-guid: 827a98d3f371eb64a914ba62614a4c3f
+guid: 3c100ae92bd39e74db2c1570a582ea56
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: pasted__Turmeric_UV
+    2100000: RedBug_UV
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Turmeric
+    4300000: RedBug_mud
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Turmeric_UV
-    second: {fileID: 2100000, guid: 1f02022d255332c42931e6b52c1265e8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__Turmeric_UV
-    second: {fileID: 2100000, guid: 1f02022d255332c42931e6b52c1265e8, type: 2}
+      name: RedBug_UV
+    second: {fileID: 2100000, guid: 1448ea1cfbf439347b42090024020144, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

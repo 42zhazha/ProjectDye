@@ -1,25 +1,20 @@
 fileFormatVersion: 2
-guid: cca29a458f2d7de4ea47bf0994265557
+guid: 9fd2a2f43e8efff4da642625a4f9e262
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: DyesTool_UV
+    2100000: Cloth
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sifter
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: DyesTool_UV
-    second: {fileID: 2100000, guid: f6717c750ec6d2140ae9ab9c295d0d40, type: 2}
+    4300000: Cloth1
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -45,7 +40,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 15
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

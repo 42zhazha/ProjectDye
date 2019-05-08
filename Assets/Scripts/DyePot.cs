@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class DyePot : DyeObject
 {
     [SerializeField] Transform cuisinePoint;
@@ -21,13 +21,15 @@ public class DyePot : DyeObject
     float maxCookTime = 3;
     public string recipeName = "";
     List<Cuisine> cuisines = new List<Cuisine>();
-
+    [SerializeField] GameObject clothPoint;
     public void Clean()
     {
         recipeName = "";
         Endure = 0;
         cuisines = new List<Cuisine>();
         hasChief = false;
+        clothPoint.SetActive(false);
+        clothPoint.transform.DOKill();
         isCharred = false;
         isCooking = true;
         isCookFinish = false;
@@ -78,8 +80,11 @@ public class DyePot : DyeObject
             return false;
 
         if (dye.type == DyeType.Cloth)
+        {
+            clothPoint.SetActive(true);
+            clothPoint.transform.DOLocalRotate(clothPoint.transform.localEulerAngles + new Vector3(0, 360f), 3, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
             hasChief = true;
-
+        }
         cuisines.Add(new Cuisine() { dye = dye, Ripening = 0 });
         Endure = 0;
         Destroy(dye.gameObject);
