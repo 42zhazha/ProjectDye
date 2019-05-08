@@ -82,7 +82,7 @@ public class DyePot : DyeObject
         if (dye.type == DyeType.Cloth)
         {
             clothPoint.SetActive(true);
-            clothPoint.transform.DOLocalRotate(clothPoint.transform.localEulerAngles + new Vector3(0, 360f), 3, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
+
             hasChief = true;
         }
         cuisines.Add(new Cuisine() { dye = dye, Ripening = 0 });
@@ -116,6 +116,7 @@ public class DyePot : DyeObject
         }
         cuisinePoint.Rotate(Vector3.left * Time.deltaTime);
         fillImage.fillAmount = currectTime / (cuisines.Count * 3);
+        clothPoint.transform.eulerAngles += new Vector3(0, 100) * Time.deltaTime;
         if (isCookFinish)
             Endure += Time.deltaTime;
         if (Endure >= maxCookTime)
