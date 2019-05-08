@@ -936,12 +936,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114781378764602346, guid: 58cf9605a97149749801d98ae1070823,
-        type: 2}
-      propertyPath: dyeResource
-      value: 
-      objectReference: {fileID: 114998617034096636, guid: ddec93822f76c8f4a91cd3e050a8e5b4,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58cf9605a97149749801d98ae1070823, type: 2}
   m_IsPrefabAsset: 0
@@ -2278,12 +2272,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 114039762124111942, guid: 68db4214030f1ca49af1b7eb9dec0e21,
-        type: 2}
-      propertyPath: dyeResource
-      value: 
-      objectReference: {fileID: 114061294126549188, guid: aa3c2935cdd77134d8aa38efce43d6fd,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68db4214030f1ca49af1b7eb9dec0e21, type: 2}
   m_IsPrefabAsset: 0

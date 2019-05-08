@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174266677658862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4337020588460816}
@@ -168,5 +168,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectOnDesk: {fileID: 0}
   DeskTransform: {fileID: 4073001064156538}
-  dyeResource: {fileID: 114866039725920914, guid: aa3c2935cdd77134d8aa38efce43d6fd,
+  dyeResource: {fileID: 114061294126549188, guid: aa3c2935cdd77134d8aa38efce43d6fd,
     type: 2}

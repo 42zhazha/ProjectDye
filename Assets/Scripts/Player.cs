@@ -55,8 +55,7 @@ public class Player : MonoBehaviour
         {
             PickUpTool();
         }
-
-        else if (Input.GetButtonUp("Player" + PlayerId.ToString() + "Button3"))
+        else if (Input.GetButtonUp("Player" + PlayerId.ToString() + "Button3") || Input.GetButton("Player" + PlayerId.ToString() + "Button3") == false)
         {
             if (this.toolTable != null)
             {
@@ -67,6 +66,20 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetButton("Player" + PlayerId.ToString() + "Button3"))
         {
+            Ray ray = new Ray(transform.position - new Vector3(0, 0.25f, 0), transform.TransformDirection(Vector3.forward));
+            RaycastHit hit;
+            if (Physics.SphereCast(ray, 0.3f, out hit, 1) && hit.transform.CompareTag("DyeCube") && hit.transform.GetComponent<ToolTable>())
+            {
+            }
+            else
+            {
+                if (this.toolTable != null)
+                {
+                    this.toolTable.PutBackTool(toolPoint.GetChild(1).gameObject);
+                    this.toolTable = null;
+                }
+            }
+
             if (this.toolTable != null && toolTable.Work())
             {
                 animator.SetBool("IsWorking", true);
@@ -74,6 +87,10 @@ public class Player : MonoBehaviour
             else
 
                 animator.SetBool("IsWorking", false);
+        }
+        else
+        {
+
         }
     }
 
@@ -102,7 +119,7 @@ public class Player : MonoBehaviour
                         tool.transform.localPosition = Vector3.zero;
                         tool.transform.localEulerAngles = Vector3.zero;
                     }
-                    animator.SetBool("IsWorking ", true);
+                    animator.SetBool("IsWorking", true);
                     transform.LookAt(new Vector3(toolTable.transform.position.x, transform.position.y, toolTable.transform.position.z));
                 }
             }

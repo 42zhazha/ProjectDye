@@ -230,6 +230,7 @@ public class DyePot : DyeObject
             }
             GameObject cuisine = Instantiate(Resources.Load<GameObject>("Prefab/Cylinder/" + recipeName), cuisinePoint);
             cuisine.transform.localPosition = Vector3.zero;
+            cuisine.transform.localEulerAngles = Vector3.zero;
         }
     }
 
