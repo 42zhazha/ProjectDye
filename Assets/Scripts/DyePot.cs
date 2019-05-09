@@ -7,15 +7,27 @@ public class DyePot : DyeObject
 {
     [SerializeField] Transform cuisinePoint;
     [SerializeField] Transform additivePoint;
+    [SerializeField] GameObject smoshObject;
     class Cuisine
     {
         public DyeObject dye;
         public float Ripening = 0;
     }
-    //是否放入主材料
+
+    /// <summary>
+    /// 是否放入主材料
+    /// </summary>
     public bool hasChief = false;
+    /// <summary>
+    /// 是否燒焦
+    /// </summary>
     public bool isCharred = false;
-    public bool isCooking = true;
+
+
+
+    public bool IsCooking = true;
+
+
     public bool isCookFinish = false;
     float Endure = 0;
     float maxCookTime = 3;
@@ -23,6 +35,7 @@ public class DyePot : DyeObject
     List<Cuisine> cuisines = new List<Cuisine>();
     public bool hasCuisines { get { return cuisines.Count > 0; } }
     [SerializeField] GameObject clothPoint;
+
     public void Clean()
     {
         recipeName = "";
@@ -32,7 +45,7 @@ public class DyePot : DyeObject
         clothPoint.SetActive(false);
         clothPoint.transform.DOKill();
         isCharred = false;
-        isCooking = true;
+        IsCooking = true;
         isCookFinish = false;
         fillImage.fillAmount = 0;
         int childs = cuisinePoint.childCount;
@@ -49,9 +62,13 @@ public class DyePot : DyeObject
 
     override protected void Update()
     {
-        if (isCooking && hasCuisines)
+        if (IsCooking && hasCuisines)
+        {
             Cook();
-
+            smoshObject.SetActive(true);
+        }
+        else
+            smoshObject.SetActive(false);
 
 
         if (fillImage.fillAmount > 0 && fillImage.fillAmount < 1)
@@ -70,6 +87,11 @@ public class DyePot : DyeObject
 
     }
 
+    /// <summary>
+    /// 添加原材料
+    /// </summary>
+    /// <param name="dye"></param>
+    /// <returns></returns>
     public bool AddCuisine(DyeObject dye)
     {
         // if (isCharred)

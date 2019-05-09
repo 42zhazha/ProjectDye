@@ -13,7 +13,7 @@ public class Stove : DyeCube
             {
                 DyePot pot = obj as DyePot;
                 fire.SetActive(pot.hasCuisines);
-                pot.isCooking = true;
+                pot.IsCooking = true;
                 return true;
             }
         }
@@ -32,7 +32,7 @@ public class Stove : DyeCube
         DyeObject obj = base.Take();
         if (obj != null)
         {
-            ((DyePot)obj).isCooking = false;
+            ((DyePot)obj).IsCooking = false;
             fire.SetActive(false);
         }
         return obj;
