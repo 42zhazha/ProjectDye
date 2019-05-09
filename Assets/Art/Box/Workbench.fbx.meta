@@ -1,26 +1,15 @@
 fileFormatVersion: 2
-guid: f43ddebf5c2b89e4bac3c1c162646e62
+guid: 6b5917f12330f2343b79e983bdd0e81e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Lonicera_UV
-    2100002: Box_UV
+    2100000: Workbench
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box_Lonicera
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Box_UV2
-    second: {fileID: 2100000, guid: b71456b793ab99341a384b0a1a97aa15, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Lonicera_UV
-    second: {fileID: 2100000, guid: 064161d4a0275cc47831d3446adf0e10, type: 2}
+    4300000: Workbench2
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0

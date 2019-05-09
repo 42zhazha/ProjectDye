@@ -11,6 +11,23 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1645992316065380}
   m_IsPrefabAsset: 1
+--- !u!1 &1257221279555694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4056646869543098}
+  - component: {fileID: 33608433279282492}
+  - component: {fileID: 23334207606340348}
+  m_Layer: 0
+  m_Name: Box_Cloth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1645992316065380
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,23 +60,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1789853330279860
-GameObject:
-  m_ObjectHideFlags: 0
+--- !u!4 &4056646869543098
+Transform:
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4979131995266946}
-  - component: {fileID: 33853810279176188}
-  - component: {fileID: 23970576757903726}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_GameObject: {fileID: 1257221279555694}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.537, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4625157124097262}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4527052595742806
 Transform:
   m_ObjectHideFlags: 1
@@ -80,33 +93,20 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1645992316065380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.888, y: 0.54, z: 1.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.88, y: 0.54, z: 2.24}
+  m_LocalScale: {x: 1.3, y: 1, z: 1.3}
   m_Children:
   - {fileID: 4527052595742806}
-  - {fileID: 4979131995266946}
+  - {fileID: 4056646869543098}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4979131995266946
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1789853330279860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4625157124097262}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23970576757903726
+--- !u!23 &23334207606340348
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1789853330279860}
+  m_GameObject: {fileID: 1257221279555694}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -116,7 +116,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b71456b793ab99341a384b0a1a97aa15, type: 2}
+  - {fileID: 2100000, guid: 085e5a8a75752a24e8c73b4fbcd274df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,13 +137,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33853810279176188
+--- !u!33 &33608433279282492
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1789853330279860}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_GameObject: {fileID: 1257221279555694}
+  m_Mesh: {fileID: 4300000, guid: f37b580c483618846a972d18093ef99a, type: 3}
 --- !u!65 &65239289140895960
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -153,7 +154,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.8, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114024405708223066
 MonoBehaviour:
