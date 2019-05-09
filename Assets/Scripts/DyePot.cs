@@ -84,7 +84,6 @@ public class DyePot : DyeObject
         if (dye.type == DyeType.Cloth)
         {
             clothPoint.SetActive(true);
-
             hasChief = true;
         }
         cuisines.Add(new Cuisine() { dye = dye, Ripening = 0 });

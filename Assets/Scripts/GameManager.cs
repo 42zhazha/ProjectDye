@@ -17,16 +17,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Invoke("AddRecipeOrder", 2);
+        isConnect[0] = true;
+        AddPlayer(1);
     }
 
     private void Update()
     {
-        if (isConnect[0] == false && Input.GetButtonDown("Player1StartButton"))
-        {
-            isConnect[0] = true;
-            AddPlayer(1);
-        }
-        else if (isConnect[1] == false && Input.GetButtonDown("Player2StartButton"))
+        if (isConnect[1] == false && Input.GetButtonDown("Player2StartButton"))
         {
             isConnect[1] = true;
             AddPlayer(2);

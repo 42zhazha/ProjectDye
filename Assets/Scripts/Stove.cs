@@ -12,21 +12,17 @@ public class Stove : DyeCube
             if (base.Put(obj))
             {
                 DyePot pot = obj as DyePot;
-                if (pot.hasCuisines)
-                    fire.SetActive(true);
+                fire.SetActive(pot.hasCuisines);
                 pot.isCooking = true;
                 return true;
             }
         }
         else if (ObjectOnDesk != null && ObjectOnDesk.type == DyeType.Pot)
         {
-            if (((DyePot)ObjectOnDesk).Fusion(obj))
-            {
-                fire.SetActive(true);
-                return true;
-            }
-            else
-                return false;
+            DyePot pot = ObjectOnDesk as DyePot;
+            bool flag = pot.Fusion(obj);
+            fire.SetActive(pot.hasCuisines);
+            return flag;
         }
         return false;
     }

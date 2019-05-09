@@ -88,10 +88,6 @@ public class Player : MonoBehaviour
 
                 animator.SetBool("IsWorking", false);
         }
-        else
-        {
-
-        }
     }
 
 
@@ -171,7 +167,6 @@ public class Player : MonoBehaviour
     {
         Ray ray = new Ray(transform.position - new Vector3(0, 0.25f, 0), transform.TransformDirection(Vector3.forward));
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, 0.3f, transform.TransformDirection(Vector3.forward), 1);
-
 
         int index = -1;
         for (int i = 0; i < hits.Length; i++)
