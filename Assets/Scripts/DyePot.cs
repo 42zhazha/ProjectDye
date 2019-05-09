@@ -21,6 +21,7 @@ public class DyePot : DyeObject
     float maxCookTime = 3;
     public string recipeName = "";
     List<Cuisine> cuisines = new List<Cuisine>();
+    public bool hasCuisines { get { return cuisines.Count > 0; } }
     [SerializeField] GameObject clothPoint;
     public void Clean()
     {
@@ -48,7 +49,7 @@ public class DyePot : DyeObject
 
     override protected void Update()
     {
-        if (isCooking && cuisines.Count > 0)
+        if (isCooking && hasCuisines)
             Cook();
 
 
@@ -56,14 +57,15 @@ public class DyePot : DyeObject
         if (fillImage.fillAmount > 0 && fillImage.fillAmount < 1)
         {
             fillImage.transform.parent.gameObject.SetActive(true);
-            Vector3 target = Camera.main.transform.position;
-            target.x = transform.position.x;
-            UIRectTransform.LookAt(target);
+
         }
         else
         {
             fillImage.transform.parent.gameObject.SetActive(false);
         }
+        Vector3 target = Camera.main.transform.position;
+        target.x = transform.position.x;
+        UIRectTransform.LookAt(target);
 
 
     }
@@ -114,7 +116,6 @@ public class DyePot : DyeObject
                 break;
             }
         }
-        cuisinePoint.Rotate(Vector3.left * Time.deltaTime);
         fillImage.fillAmount = currectTime / (cuisines.Count * 3);
         clothPoint.transform.eulerAngles += new Vector3(0, 100) * Time.deltaTime;
         if (isCookFinish)
@@ -128,7 +129,6 @@ public class DyePot : DyeObject
 
     public override bool Fusion(DyeObject dye)
     {
-
         if (dye.type == DyeType.Pot)
             return false;
         if (dye.type == DyeType.Plate)

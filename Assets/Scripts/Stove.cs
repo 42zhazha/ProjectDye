@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class Stove : DyeCube
 {
+    [SerializeField] GameObject fire;
     public override bool Put(DyeObject obj)
     {
         if (obj.type == DyeType.Pot)
         {
             if (base.Put(obj))
             {
-                ((DyePot)obj).isCooking = true;
+                DyePot pot = obj as DyePot;
+                if (pot.hasCuisines)
+                    fire.SetActive(true);
+                pot.isCooking = true;
                 return true;
             }
         }
         else if (ObjectOnDesk != null && ObjectOnDesk.type == DyeType.Pot)
         {
-
-            return ((DyePot)ObjectOnDesk).Fusion(obj);
+            if (((DyePot)ObjectOnDesk).Fusion(obj))
+            {
+                fire.SetActive(true);
+                return true;
+            }
+            else
+                return false;
         }
         return false;
     }
@@ -28,6 +37,7 @@ public class Stove : DyeCube
         if (obj != null)
         {
             ((DyePot)obj).isCooking = false;
+            fire.SetActive(false);
         }
         return obj;
     }
