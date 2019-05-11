@@ -31,14 +31,14 @@ public class DyePot : DyeObject
     public bool isCookFinish = false;
     float Endure = 0;
     float maxCookTime = 3;
-    public string recipeName = "";
+    public CuisineData CuisineData = null;
     List<Cuisine> cuisines = new List<Cuisine>();
     public bool hasCuisines { get { return cuisines.Count > 0; } }
     [SerializeField] GameObject clothPoint;
 
     public void Clean()
     {
-        recipeName = "";
+        CuisineData = null;
         Endure = 0;
         cuisines = new List<Cuisine>();
         hasChief = false;
@@ -128,7 +128,7 @@ public class DyePot : DyeObject
         for (int i = 0; i < cuisines.Count; i++)
         {
             currectTime += cuisines[i].Ripening;
-            if (cuisines[i].Ripening >= 3)
+            if (cuisines[i].Ripening >= 6)
                 continue;
             else
             {
@@ -137,7 +137,7 @@ public class DyePot : DyeObject
                 break;
             }
         }
-        fillImage.fillAmount = currectTime / (cuisines.Count * 3);
+        fillImage.fillAmount = currectTime / (cuisines.Count * 6);
         clothPoint.transform.eulerAngles += new Vector3(0, 100) * Time.deltaTime;
         if (isCookFinish)
             Endure += Time.deltaTime;
@@ -155,9 +155,9 @@ public class DyePot : DyeObject
         if (dye.type == DyeType.Plate)
         {
             Plate plate = (dye as Plate);
-            if (isCookFinish && hasChief && plate.recipeName.Equals(""))
+            if (isCookFinish && hasChief && plate.data == null)
             {
-                plate.SetRecipe(recipeName);
+                plate.SetRecipe(CuisineData);
                 Clean();
             }
             return false;
@@ -172,6 +172,7 @@ public class DyePot : DyeObject
         {
             recipe += (int)cuisines[i].dye.type;
         }
+        string recipeName = "";
         switch (recipe)
         {
             case 1:
@@ -242,14 +243,15 @@ public class DyePot : DyeObject
                 recipeName = "Yellow_Yellow_Red";
                 break;
         }
-        if (recipeName != "")
+        CuisineData = CuisineData.Get(recipeName);
+        if (CuisineData != null)
         {
             int childs = cuisinePoint.childCount;
             for (int i = childs - 1; i >= 0; i--)
             {
                 GameObject.DestroyImmediate(cuisinePoint.GetChild(0).gameObject);
             }
-            GameObject cuisine = Instantiate(Resources.Load<GameObject>("Prefab/Cylinder/" + recipeName), cuisinePoint);
+            GameObject cuisine = Instantiate(Resources.Load<GameObject>("Prefab/Cylinder/" + CuisineData.name), cuisinePoint);
             cuisine.transform.localPosition = Vector3.zero;
             cuisine.transform.localEulerAngles = Vector3.zero;
         }

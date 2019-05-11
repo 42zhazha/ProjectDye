@@ -1,61 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Com.LuisPedroFonseca.ProCamera2D;
+
 public class GameManager : MonoBehaviour
 {
-    bool[] isConnect = new bool[2] { false, false };
+    public int level;
+    public System.Action<int> OnAddPlayer;
+    public bool[] isConnects = new bool[2] { false, false };
     public static GameManager Instance;
-    public RecipeContainer recipeContainer;
 
     private void Awake()
     {
+        level = 0;
         Instance = this;
-    }
-
-    void Start()
-    {
-        Invoke("AddRecipeOrder", 2);
-        isConnect[0] = true;
-        AddPlayer(1);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
     {
-        if (isConnect[1] == false && Input.GetButtonDown("Player2StartButton"))
+        for (int i = 0; i < isConnects.Length; i++)
         {
-            isConnect[1] = true;
-            AddPlayer(2);
+            if (isConnects[i] == false && Input.GetButtonDown("Player" + (i + 1).ToString() + "StartButton"))
+            {
+                isConnects[i] = true;
+                if (OnAddPlayer != null)
+                    OnAddPlayer(i + 1);
+            }
         }
     }
 
-    void AddPlayer(int id)
+    public void NextScene()
     {
-        GameObject obj = Instantiate(Resources.Load<GameObject>("Prefab/Player"));
-        obj.GetComponent<Player>().PlayerId = id;
-        Camera.main.GetComponent<ProCamera2D>().AddCameraTarget(obj.transform, 1, 1, 0, new Vector2(-6f, -15f));
-    }
-
-    void AddRecipeOrder()
-    {
-        if (recipeContainer.AddRecipeOrder())
-            Invoke("AddRecipeOrder", 8);
-    }
-
-    [SerializeField] Text coinText;
-    int coid = 0;
-
-    public void FinishOrder(string Recipe)
-    {
-        if (recipeContainer.ContainsRecipe(Recipe))
-        {
-
-            coinText.text = (coid += 50).ToString();
-        }
+        if (level < 5)
+            level += 1;
+        else
+            level = 0;
+        if (level == 0)
+            SceneManager.LoadScene("Init");
         else
         {
-            //送錯菜單
+            SceneManager.LoadScene("Stage" + level.ToString());
+            SceneManager.LoadScene("UI", LoadSceneMode.Additive);
         }
     }
+
 }
