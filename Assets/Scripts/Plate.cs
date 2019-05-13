@@ -8,11 +8,13 @@ public class Plate : DyeObject
     [SerializeField] GameObject Cloth;
     [SerializeField] Transform additivePoint;
     public CuisineData data { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();
         data = null;
     }
+
     public void SetRecipe(CuisineData data)
     {
         this.data = data;
@@ -26,6 +28,7 @@ public class Plate : DyeObject
             obj.transform.SetParent(additivePoint, false);
         }
     }
+
     override protected void Update()
     {
         Vector3 target = Camera.main.transform.position;
