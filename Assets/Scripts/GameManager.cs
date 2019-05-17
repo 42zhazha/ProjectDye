@@ -31,17 +31,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        if (Input.anyKeyDown)
-        {
-
-            Debug.Log(Event.current.keyCode);
-        }
-    }
-
-
-
     public void NextScene()
     {
         if (level < 5)

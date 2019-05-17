@@ -6,16 +6,9 @@ using System.Linq;
 
 public class RecipeContainer : MonoBehaviour
 {
-    public bool IsComplete { get { return recipes.Count == 0 && cuisinesQueue.Count == 0; } }
-    Queue<string> cuisinesQueue = new Queue<string>();
     List<RecipeUI> recipes = new List<RecipeUI>();
     [SerializeField] RecipeUI recipePrefab;
 
-    public void SetCuisines(string[] cuisines)
-    {
-        for (int i = 0; i < cuisines.Length; i++)
-            cuisinesQueue.Enqueue(cuisines[i]);
-    }
 
     public bool DeliveryCuisine(string cuisineName)
     {
@@ -35,24 +28,17 @@ public class RecipeContainer : MonoBehaviour
         return false;
     }
 
-    public bool AddRecipeOrder()
+
+
+    public void AddRecipeOrder(string name)
     {
-        if (recipes.Count <= 3 && cuisinesQueue.Count > 0)
-        {
-            CuisineData data = CuisineData.Get(cuisinesQueue.Dequeue());
+        CuisineData data = CuisineData.Get(name);
 
-            if (data == null)
-                return false;
-
-            RecipeUI recipeUI = Instantiate(recipePrefab, transform);
-            recipes.Add(recipeUI);
-            recipeUI.SetCuisineData(data);
-            recipeUI.transform.localPosition = new Vector3(1400, 0);
-            Recast();
-            return true;
-        }
-        else
-            return false;
+        RecipeUI recipeUI = Instantiate(recipePrefab, transform);
+        recipes.Add(recipeUI);
+        recipeUI.SetCuisineData(data);
+        recipeUI.transform.localPosition = new Vector3(1400, 0);
+        Recast();
     }
 
 

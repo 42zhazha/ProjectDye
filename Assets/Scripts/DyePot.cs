@@ -108,6 +108,7 @@ public class DyePot : DyeObject
             clothPoint.SetActive(true);
             hasChief = true;
         }
+
         cuisines.Add(new Cuisine() { dye = dye, Ripening = 0 });
         Endure = 0;
         Destroy(dye.gameObject);
@@ -148,7 +149,7 @@ public class DyePot : DyeObject
         }
     }
 
-    public override bool Fusion(DyeObject dye)
+    public override bool Fusion(DyeObject dye, int playerId = -1)
     {
         if (dye.type == DyeType.Pot)
             return false;
@@ -157,12 +158,25 @@ public class DyePot : DyeObject
             Plate plate = (dye as Plate);
             if (isCookFinish && hasChief && plate.data == null)
             {
-                plate.SetRecipe(CuisineData);
+                List<List<LogPackage>> logs = new List<List<LogPackage>>();
+                for (int i = 0; i < cuisines.Count; i++)
+                {
+                    logs.Add(cuisines[i].dye.logData);
+                }
+                plate.SetRecipe(CuisineData, playerId, logs);
                 Clean();
             }
             return false;
         }
-        return AddCuisine(dye);
+
+        if (AddCuisine(dye))
+        {
+
+            if (playerId != -1)
+                dye.logData.Add(new LogPackage(playerId, "Cook"));
+            return true;
+        }
+        return false;
     }
 
     void RenderRecipe()

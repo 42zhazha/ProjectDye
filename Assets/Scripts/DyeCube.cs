@@ -14,7 +14,7 @@ public class DyeCube : MonoBehaviour
         tag = "DyeCube";
     }
 
-    virtual public DyeObject Take()
+    virtual public DyeObject Take(int playerId )
     {
         if (ObjectOnDesk)
         {
@@ -25,7 +25,7 @@ public class DyeCube : MonoBehaviour
         return null;
     }
 
-    virtual public bool Put(DyeObject obj)
+    virtual public bool Put(DyeObject obj,int playerId )
     {
         if (ObjectOnDesk == null)
         {
@@ -33,7 +33,7 @@ public class DyeCube : MonoBehaviour
             obj.Mounting(DeskTransform);
             return true;
         }
-        ObjectOnDesk.Fusion(obj);
+        ObjectOnDesk.Fusion(obj, playerId);
         return false;
     }
 }

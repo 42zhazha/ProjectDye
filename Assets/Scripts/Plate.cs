@@ -15,8 +15,13 @@ public class Plate : DyeObject
         data = null;
     }
 
-    public void SetRecipe(CuisineData data)
+    public List<List<LogPackage>> otherLog;
+
+    public void SetRecipe(CuisineData data, int playerId, List<List<LogPackage>> otherLog)
     {
+
+        logData.Add(new LogPackage(playerId, "Dry"));
+        this.otherLog = otherLog;
         this.data = data;
         Cloth.SetActive(true);
         Cloth.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Prefab/Cylinder/" + data.name);
@@ -38,6 +43,7 @@ public class Plate : DyeObject
 
     public void Clean()
     {
+        logData = new List<LogPackage>();
         data = null;
         Cloth.SetActive(false);
         int childs = additivePoint.childCount;

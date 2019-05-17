@@ -8,96 +8,162 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     public static StageManager Instance;
-
+    Queue<string> cuisinesQueue = new Queue<string>();
     [SerializeField] Text coinText;
     [SerializeField] RecipeContainer recipeContainer;
+    Customer currectCustomer;
+
+    List<Player> players = new List<Player>();
+
     int coid = 0;
 
     private void Awake()
     {
         Instance = this;
-        bool[] isConnects = GameManager.Instance.isConnects;
-        for (int i = 0; i < isConnects.Length; i++)
-        {
-            if (isConnects[i])
-                AddPlayer(i + 1);
-        }
-        GameManager.Instance.OnAddPlayer += AddPlayer;
         SetCuisines(GameManager.Instance.level);
-        Invoke("AddRecipeOrder", 2);
+    }
+    private void Update()
+    {
+        if (isGameStart == false)
+        {
+            bool[] isConnects = GameManager.Instance.isConnects;
+            for (int i = 0; i < isConnects.Length; i++)
+            {
+                if (isConnects[i] && Input.GetButtonDown("Player" + (i + 1).ToString() + "Button4"))
+                    GameStart();
+            }
+        }
     }
 
     void SetCuisines(int level)
     {
+        string[] cuisines = new string[0];
         switch (level)
         {
             case 1:
-                recipeContainer.SetCuisines(new string[10] { "Yellow", "Yellow", "Yellow_Yellow", "Yellow_Yellow", "Yellow", "Yellow", "Yellow_Yellow", "Yellow_Yellow", "Yellow", "Yellow_Yellow" });
+                cuisines = new string[6] { "Yellow", "Yellow", "Yellow_Yellow", "Yellow_Yellow", "Yellow", "Yellow_Yellow" };
                 break;
             case 2:
-                recipeContainer.SetCuisines(new string[10] { "Blue", "Yellow", "Blue", "Yellow_Blue", "Blue_Blue", "Yellow_Yellow_Blue", "Yellow_Blue", "Yellow_Blue_Blue", "Yellow_Blue", "Yellow_Yellow_Blue" });
+                cuisines = new string[8] { "Blue", "Yellow", "Yellow_Blue", "Blue_Blue", "Yellow_Yellow_Blue", "Yellow_Blue", "Yellow_Blue_Blue", "Yellow_Yellow_Blue" };
                 break;
             case 3:
-                recipeContainer.SetCuisines(new string[10] { "Red", "Blue", "Blue_Red", "Red_Red", "Blue_Blue_Red", "Blue_Blue", "Red_Red", "Blue_Red_Red", "Blue_Red", "Blue_Blue_Red" });
+                cuisines = new string[10] { "Red", "Blue", "Blue_Red", "Red_Red", "Blue_Blue_Red", "Blue_Blue", "Red_Red", "Blue_Red_Red", "Blue_Red", "Blue_Blue_Red" };
                 break;
             case 4:
-                recipeContainer.SetCuisines(new string[10] { "Yellow", "Red", "Yellow_Red", "Yellow_Red_Red", "Red_Red", "Yellow_Yellow_Red", "Yellow_Yellow", "Yellow_Red", "Yellow_Red_Red", "Yellow_Yellow_Red" });
+                cuisines = new string[10] { "Yellow", "Red", "Yellow_Red", "Yellow_Red_Red", "Red_Red", "Yellow_Yellow_Red", "Yellow_Yellow", "Yellow_Red", "Yellow_Red_Red", "Yellow_Yellow_Red" };
                 break;
             case 5:
-                recipeContainer.SetCuisines(new string[10] { "Yellow", "Red", "Blue", "Yellow_Red_Red", "Blue_Red_Red", "Yellow_Blue_Red", "Yellow_Yellow_Blue", "Yellow_Yellow_Red", "Yellow_Blue_Blue", "Yellow_Blue_Red" });
+                cuisines = new string[10] { "Yellow", "Red", "Blue", "Yellow_Red_Red", "Blue_Red_Red", "Yellow_Blue_Red", "Yellow_Yellow_Blue", "Yellow_Yellow_Red", "Yellow_Blue_Blue", "Yellow_Blue_Red" };
                 break;
         }
+
+        for (int i = 0; i < cuisines.Length; i++)
+            cuisinesQueue.Enqueue(cuisines[i]);
     }
+
 
     private void OnDestroy()
     {
         GameManager.Instance.OnAddPlayer -= AddPlayer;
     }
 
-    void AddRecipeOrder()
+    void AddCustomer()
     {
-        if (recipeContainer.AddRecipeOrder())
-            Invoke("AddRecipeOrder", 16);
-        else
-            Invoke("AddRecipeOrder", 8);
+        if (cuisinesQueue.Count > 0)
+        {
+            GameObject obj = Instantiate(Resources.Load<GameObject>("Prefab/Customer"));
+            currectCustomer = obj.GetComponent<Customer>();
+            currectCustomer.data = cuisinesQueue.Dequeue();
+            obj.transform.position = new Vector3(-7.5f, 0, 9);
+        }
+    }
+
+    public void AddOrder(string name)
+    {
+        recipeContainer.AddRecipeOrder(name);
     }
 
     void AddPlayer(int id)
     {
         GameObject obj = Instantiate(Resources.Load<GameObject>("Prefab/Player"));
-        obj.GetComponent<Player>().PlayerId = id;
-        Camera.main.GetComponent<ProCamera2D>().AddCameraTarget(obj.transform, 1, 1, 0, new Vector2(-6f, -15f));
+        Player player = obj.GetComponent<Player>();
+        player.PlayerId = id;
+        players.Add(player);
+        player.transform.position = new Vector3(id, 2, 0);
+        Camera.main.GetComponent<ProCamera2D>().AddCameraTarget(obj.transform, 1, 1, 0, new Vector2(-6f, -15f));    
     }
 
     public void DeliveryOrder(string Recipe)
     {
         if (recipeContainer.DeliveryCuisine(Recipe))
         {
+            currectCustomer.Leave();
             coinText.text = (coid += 50).ToString();
-            if (recipeContainer.IsComplete)
+            if (cuisinesQueue.Count == 0)
             {
-                GameManager.Instance.NextScene();
+                GameEnd();
+            }
+            else
+            {
+                Invoke("AddCustomer", 1);
             }
         }
         else
         {
             //送錯菜單
         }
-
     }
 
     [SerializeField] Text timeText;
     int time = 0;
-    // Use this for initialization
-    void Start()
-    {
-        timeText.text = Mathf.FloorToInt(time / 60f).ToString() + ":" + (time % 60).ToString("00");
-        InvokeRepeating("Tick", 1, 1);
-    }
+
+
 
     void Tick()
     {
         time += 1;
         timeText.text = Mathf.FloorToInt(time / 60f).ToString() + ":" + (time % 60).ToString("00");
+    }
+
+    [SerializeField] GameObject[] GameUIs;
+    [SerializeField] GameObject ScoreUI;
+    [SerializeField] GameObject TutorialUI;
+    bool isGameStart = false;
+    void GameStart()
+    {
+
+isGameStart = true;
+
+        timeText.text = Mathf.FloorToInt(time / 60f).ToString() + ":" + (time % 60).ToString("00");
+        InvokeRepeating("Tick", 1, 1);
+
+        bool[] isConnects = GameManager.Instance.isConnects;
+        Camera.main.GetComponent<ProCamera2D>().RemoveAllCameraTargets();
+        for (int i = 0; i < isConnects.Length; i++)
+        {
+            if (isConnects[i])
+                AddPlayer(i + 1);
+        }
+
+        for (int i = 0; i < GameUIs.Length; i++)
+        {
+            GameUIs[i].SetActive(true);
+        }
+        TutorialUI.SetActive(false);
+        GameManager.Instance.OnAddPlayer += AddPlayer;
+        Invoke("AddCustomer", 2);
+    }
+
+    void GameEnd()
+    {
+        for (int i = 0; i < GameUIs.Length; i++)
+        {
+            GameUIs[i].SetActive(false);
+        }
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].enabled = false;
+        }
+        ScoreUI.SetActive(true);
     }
 }

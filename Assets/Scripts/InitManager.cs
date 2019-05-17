@@ -7,9 +7,11 @@ public class InitManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (GameManager.Instance == null)
-            new GameObject("GameManager", typeof(GameManager));
         GameManager.Instance.OnAddPlayer += AddPlayer;
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnAddPlayer -= AddPlayer;
     }
 
     void AddPlayer(int id)

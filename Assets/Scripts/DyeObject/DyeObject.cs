@@ -16,6 +16,8 @@ public enum DyeType : int
 
 public class DyeObject : MonoBehaviour
 {
+    public List<LogPackage> logData = new List<LogPackage>();
+
     private Vector3 offset = Vector3.zero;
     [SerializeField] protected RectTransform UIRectTransform;
     [SerializeField] protected Image fillImage;
@@ -26,19 +28,23 @@ public class DyeObject : MonoBehaviour
     public bool IsProcessFinish { get { return processValue >= 1; } }
 
     public bool CanChop = false;
-    public bool Chop()
+    public bool Chop(int playerId )
     {
         if (IsProcessFinish)
             return false;
+        if (processValue == 0)
+            logData.Add(new LogPackage( playerId,"Chop"));
         processValue += Time.deltaTime;
         return true;
     }
 
     public bool CanPestled = false;
-    public bool Pestling()
+    public bool Pestling(int playerId)
     {
         if (IsProcessFinish)
             return false;
+        if (processValue == 0 )
+            logData.Add(new LogPackage(playerId, "Pestling"));
         processValue += Time.deltaTime;
         return true;
     }
@@ -46,7 +52,7 @@ public class DyeObject : MonoBehaviour
     [SerializeField] new Collider collider;
     [SerializeField] new Rigidbody rigidbody;
 
-    virtual public bool Fusion(DyeObject dye)
+    virtual public bool Fusion(DyeObject dye, int playerId = -1)
     {
         return false;
     }
@@ -97,6 +103,7 @@ public class DyeObject : MonoBehaviour
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             collider.enabled = false;
             rigidbody.isKinematic = true;
+
         }
         else
         {

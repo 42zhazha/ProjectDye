@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (this.toolTable != null && toolTable.Work())
+            if (this.toolTable != null && toolTable.Work(PlayerId))
             {
                 animator.SetBool("IsWorking", true);
             }
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
             if (hit.transform.CompareTag("DyeCube"))
             {
                 ToolTable toolTable = hit.transform.GetComponent<ToolTable>();
-                if (toolTable != null && toolTable.CanWork && toolTable.Work())
+                if (toolTable != null && toolTable.CanWork && toolTable.Work(PlayerId))
                 {
                     if (toolTable != this.toolTable)
                     {
@@ -147,9 +147,9 @@ public class Player : MonoBehaviour
         {
             if (hit.transform.CompareTag("DyeCube"))
             {
-                TakeDye = hit.transform.GetComponent<DyeCube>().Take();
+                TakeDye = hit.transform.GetComponent<DyeCube>().Take(PlayerId);
                 if (TakeDye != null)
-                {
+                {               
                     TakeDye.Mounting(TakePoint);
                     TakeDye.transform.localEulerAngles = Vector3.zero;
                 }
@@ -184,14 +184,19 @@ public class Player : MonoBehaviour
             if (hit.transform.CompareTag("DyeCube"))
             {
                 DyeCube cube = hit.transform.GetComponent<DyeCube>();
-                if (cube.Put(TakeDye))
+                if (cube.Put(TakeDye,PlayerId))
+                {
                     TakeDye = null;
+             
+                }
             }
             if (hit.transform.CompareTag("DyeObject"))
             {
                 DyeObject dyeHit = hit.transform.GetComponent<DyeObject>();
-                if (dyeHit.type == DyeType.Pot && (dyeHit as DyePot).Fusion(TakeDye))
+                if (dyeHit.type == DyeType.Pot && (dyeHit as DyePot).Fusion(TakeDye, PlayerId))
+                {
                     TakeDye = null;
+                }
             }
         }
         else
