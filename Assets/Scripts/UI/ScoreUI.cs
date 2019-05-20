@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ScoreUI : MonoBehaviour
 {
-
-    int selectButton = 1;
+    [SerializeField] Text time, count;
+    [SerializeField] Transform iconPoint;
+    int selectButton = 2;
     void Start()
     {
 
@@ -21,7 +22,12 @@ public class ScoreUI : MonoBehaviour
             {
                 switch (selectButton)
                 {
+                    case 0:
+
+                        break;
                     case 1:
+                        break;
+                    case 2:
                         GameManager.Instance.NextScene();
                         break;
                 }

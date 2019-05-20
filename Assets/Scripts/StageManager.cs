@@ -4,12 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using Com.LuisPedroFonseca.ProCamera2D;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.ImageEffects;
 
 public class StageManager : MonoBehaviour
 {
+    [SerializeField] GameObject[] PlayerStartUI;
+
+    int TutorialIndex = 0;
+    [SerializeField] GameObject[] LevelTutorialUI;
+    [SerializeField] GameObject ContollerTutorialUI;
+
     public static StageManager Instance;
     Queue<string> cuisinesQueue = new Queue<string>();
-    [SerializeField] Text coinText;
+    [SerializeField] Text countText, maxCountText;
     [SerializeField] RecipeContainer recipeContainer;
     Customer currectCustomer;
 
@@ -22,17 +29,37 @@ public class StageManager : MonoBehaviour
         Instance = this;
         SetCuisines(GameManager.Instance.level);
     }
+
     private void Update()
     {
+        bool[] isConnects = GameManager.Instance.isConnects;
+
+
         if (isGameStart == false)
         {
-            bool[] isConnects = GameManager.Instance.isConnects;
             for (int i = 0; i < isConnects.Length; i++)
             {
                 if (isConnects[i] && Input.GetButtonDown("Player" + (i + 1).ToString() + "Button4"))
-                    GameStart();
+                {
+                    if (TutorialIndex == 0)
+                    {
+                        LevelTutorialUI[GameManager.Instance.level - 1].SetActive(true);
+                        ContollerTutorialUI.SetActive(false);
+                        TutorialIndex++;
+                    }
+                    else
+                        GameStart();
+                }
             }
         }
+        else
+        {
+            for (int i = 0; i < isConnects.Length; i++)
+            {
+                PlayerStartUI[i].SetActive(!isConnects[i]);
+            }
+        }
+
     }
 
     void SetCuisines(int level)
@@ -59,6 +86,7 @@ public class StageManager : MonoBehaviour
 
         for (int i = 0; i < cuisines.Length; i++)
             cuisinesQueue.Enqueue(cuisines[i]);
+        maxCountText.text = "/" + cuisines.Length;
     }
 
 
@@ -90,7 +118,7 @@ public class StageManager : MonoBehaviour
         player.PlayerId = id;
         players.Add(player);
         player.transform.position = new Vector3(id, 2, 0);
-        Camera.main.GetComponent<ProCamera2D>().AddCameraTarget(obj.transform, 1, 1, 0, new Vector2(-6f, -15f));    
+        Camera.main.GetComponent<ProCamera2D>().AddCameraTarget(obj.transform, 1, 1, 0, new Vector2(-6f, -15f));
     }
 
     public void DeliveryOrder(string Recipe)
@@ -98,7 +126,7 @@ public class StageManager : MonoBehaviour
         if (recipeContainer.DeliveryCuisine(Recipe))
         {
             currectCustomer.Leave();
-            coinText.text = (coid += 50).ToString();
+            countText.text = (System.Convert.ToInt32(countText.text) + 1).ToString();
             if (cuisinesQueue.Count == 0)
             {
                 GameEnd();
@@ -132,13 +160,14 @@ public class StageManager : MonoBehaviour
     void GameStart()
     {
 
-isGameStart = true;
+        isGameStart = true;
 
         timeText.text = Mathf.FloorToInt(time / 60f).ToString() + ":" + (time % 60).ToString("00");
         InvokeRepeating("Tick", 1, 1);
 
         bool[] isConnects = GameManager.Instance.isConnects;
         Camera.main.GetComponent<ProCamera2D>().RemoveAllCameraTargets();
+        Camera.main.GetComponent<BlurOptimized>().enabled = false;
         for (int i = 0; i < isConnects.Length; i++)
         {
             if (isConnects[i])

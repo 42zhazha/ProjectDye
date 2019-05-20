@@ -453,7 +453,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1511268394359954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.745, y: -7.46, z: 12.676001}
+  m_LocalPosition: {x: -2.92, y: -7.46, z: 12.707001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4290876185665048}
@@ -677,8 +677,8 @@ MonoBehaviour:
   m_ChildAlignment: 7
   m_StartCorner: 3
   m_StartAxis: 0
-  m_CellSize: {x: 30, y: 30}
-  m_Spacing: {x: 10, y: 10}
+  m_CellSize: {x: 40, y: 40}
+  m_Spacing: {x: -5, y: -5}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &114165914831954128
@@ -776,6 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25274af015288a409db1e8f567ac072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logData: []
   UIRectTransform: {fileID: 224094917034029086}
   fillImage: {fileID: 114355891749302014}
   type: 1001
@@ -790,7 +791,6 @@ MonoBehaviour:
   isCharred: 0
   IsCooking: 1
   isCookFinish: 0
-  recipeName: 
   clothPoint: {fileID: 1993055348493298}
 --- !u!114 &114590111869499246
 MonoBehaviour:
