@@ -8,10 +8,11 @@ using UnityStandardAssets.ImageEffects;
 
 public class StageManager : MonoBehaviour
 {
+    [SerializeField] CookTutorialWindow cookTutorialWindow;
+    [SerializeField] TipUI tipUI;
     [SerializeField] GameObject[] PlayerStartUI;
 
     int TutorialIndex = 0;
-    [SerializeField] GameObject[] LevelTutorialUI;
     [SerializeField] GameObject ContollerTutorialUI;
 
     public static StageManager Instance;
@@ -27,7 +28,10 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        int level = GameManager.Instance.level;
         SetCuisines(GameManager.Instance.level);
+        cookTutorialWindow.SetLevel(level);
+        tipUI.SetLevel(level);
     }
 
     private void Update()
@@ -43,7 +47,7 @@ public class StageManager : MonoBehaviour
                 {
                     if (TutorialIndex == 0)
                     {
-                        LevelTutorialUI[GameManager.Instance.level - 1].SetActive(true);
+                        cookTutorialWindow.gameObject.SetActive(true);
                         ContollerTutorialUI.SetActive(false);
                         TutorialIndex++;
                     }
@@ -54,6 +58,7 @@ public class StageManager : MonoBehaviour
         }
         else
         {
+            tipUI.gameObject.SetActive(Input.GetButton("PlayerSelectButton"));
             for (int i = 0; i < isConnects.Length; i++)
             {
                 PlayerStartUI[i].SetActive(!isConnects[i]);
@@ -64,31 +69,30 @@ public class StageManager : MonoBehaviour
 
     void SetCuisines(int level)
     {
-        string[] cuisines = new string[0];
-        switch (level)
-        {
-            case 1:
-                cuisines = new string[6] { "Yellow", "Yellow", "Yellow_Yellow", "Yellow_Yellow", "Yellow", "Yellow_Yellow" };
-                break;
-            case 2:
-                cuisines = new string[8] { "Blue", "Yellow", "Yellow_Blue", "Blue_Blue", "Yellow_Yellow_Blue", "Yellow_Blue", "Yellow_Blue_Blue", "Yellow_Yellow_Blue" };
-                break;
-            case 3:
-                cuisines = new string[10] { "Red", "Blue", "Blue_Red", "Red_Red", "Blue_Blue_Red", "Blue_Blue", "Red_Red", "Blue_Red_Red", "Blue_Red", "Blue_Blue_Red" };
-                break;
-            case 4:
-                cuisines = new string[10] { "Yellow", "Red", "Yellow_Red", "Yellow_Red_Red", "Red_Red", "Yellow_Yellow_Red", "Yellow_Yellow", "Yellow_Red", "Yellow_Red_Red", "Yellow_Yellow_Red" };
-                break;
-            case 5:
-                cuisines = new string[10] { "Yellow", "Red", "Blue", "Yellow_Red_Red", "Blue_Red_Red", "Yellow_Blue_Red", "Yellow_Yellow_Blue", "Yellow_Yellow_Red", "Yellow_Blue_Blue", "Yellow_Blue_Red" };
-                break;
-        }
-
+        string[] cuisines = GetCuisines(level);
         for (int i = 0; i < cuisines.Length; i++)
             cuisinesQueue.Enqueue(cuisines[i]);
         maxCountText.text = "/" + cuisines.Length;
     }
 
+    string[] GetCuisines(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                return new string[6] { "Yellow", "Yellow", "Yellow_Yellow", "Yellow_Yellow", "Yellow", "Yellow_Yellow" };
+            case 2:
+                return new string[8] { "Blue", "Yellow", "Yellow_Blue", "Blue_Blue", "Yellow_Yellow_Blue", "Yellow_Blue", "Yellow_Blue_Blue", "Yellow_Yellow_Blue" };
+            case 3:
+                return new string[10] { "Red", "Blue", "Blue_Red", "Red_Red", "Blue_Blue_Red", "Blue_Blue", "Red_Red", "Blue_Red_Red", "Blue_Red", "Blue_Blue_Red" };
+            case 4:
+                return new string[10] { "Yellow", "Red", "Yellow_Red", "Yellow_Red_Red", "Red_Red", "Yellow_Yellow_Red", "Yellow_Yellow", "Yellow_Red", "Yellow_Red_Red", "Yellow_Yellow_Red" };
+            case 5:
+                return new string[10] { "Yellow", "Red", "Blue", "Yellow_Red_Red", "Blue_Red_Red", "Yellow_Blue_Red", "Yellow_Yellow_Blue", "Yellow_Yellow_Red", "Yellow_Blue_Blue", "Yellow_Blue_Red" };
+            default:
+                return new string[0];
+        }
+    }
 
     private void OnDestroy()
     {
@@ -113,7 +117,7 @@ public class StageManager : MonoBehaviour
 
     void AddPlayer(int id)
     {
-        GameObject obj = Instantiate(Resources.Load<GameObject>("Prefab/Player"));
+        GameObject obj = Instantiate(Resources.Load<GameObject>("Prefab/Player" + id.ToString()));
         Player player = obj.GetComponent<Player>();
         player.PlayerId = id;
         players.Add(player);
@@ -154,7 +158,7 @@ public class StageManager : MonoBehaviour
     }
 
     [SerializeField] GameObject[] GameUIs;
-    [SerializeField] GameObject ScoreUI;
+    [SerializeField] ScoreUI ScoreUI;
     [SerializeField] GameObject TutorialUI;
     bool isGameStart = false;
     void GameStart()
@@ -193,6 +197,6 @@ public class StageManager : MonoBehaviour
         {
             players[i].enabled = false;
         }
-        ScoreUI.SetActive(true);
+        ScoreUI.SetScore(time, GetCuisines(GameManager.Instance.level));
     }
 }

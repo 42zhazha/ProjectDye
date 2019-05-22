@@ -257,9 +257,10 @@ public class DyePot : DyeObject
                 recipeName = "Yellow_Yellow_Red";
                 break;
         }
-        CuisineData = CuisineData.Get(recipeName);
-        if (CuisineData != null)
+        CuisineData cuisineData = CuisineData.Get(recipeName);
+        if (cuisineData != null)
         {
+            this.CuisineData = cuisineData;
             int childs = cuisinePoint.childCount;
             for (int i = childs - 1; i >= 0; i--)
             {

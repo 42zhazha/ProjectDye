@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null)
+            Destroy(Instance.gameObject);
         level = 0;
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -31,6 +33,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Replay()
+    {
+        SceneManager.LoadScene("Stage" + level.ToString());
+        SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+    }
     public void NextScene()
     {
         if (level < 5)
