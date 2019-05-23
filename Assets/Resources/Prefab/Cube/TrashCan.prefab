@@ -9,50 +9,50 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1645992316065380}
+  m_RootGameObject: {fileID: 1578503021269540}
   m_IsPrefabAsset: 1
---- !u!1 &1448705951861802
+--- !u!1 &1361864644642388
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4249741868896064}
-  - component: {fileID: 33444328816931652}
-  - component: {fileID: 23838131320740794}
+  - component: {fileID: 4943205430250568}
+  - component: {fileID: 33923580781690504}
+  - component: {fileID: 23756378752219790}
   m_Layer: 0
-  m_Name: Box_Cloth
+  m_Name: TrashCan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1645992316065380
+--- !u!1 &1578503021269540
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4625157124097262}
-  - component: {fileID: 65239289140895960}
-  - component: {fileID: 114490890586307420}
+  - component: {fileID: 4885424230484166}
+  - component: {fileID: 65563461067412464}
+  - component: {fileID: 114701209461180834}
   m_Layer: 0
-  m_Name: ClothBox
+  m_Name: TrashCan
   m_TagString: DyeCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1778037283171320
+--- !u!1 &1639492818115568
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4527052595742806}
+  - component: {fileID: 4666944526003888}
   m_Layer: 0
   m_Name: DeskPoint
   m_TagString: Untagged
@@ -60,53 +60,53 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4249741868896064
+--- !u!4 &4666944526003888
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448705951861802}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.532, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4625157124097262}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4527052595742806
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1778037283171320}
+  m_GameObject: {fileID: 1639492818115568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4625157124097262}
+  m_Father: {fileID: 4885424230484166}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4625157124097262
+--- !u!4 &4885424230484166
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1645992316065380}
+  m_GameObject: {fileID: 1578503021269540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.88, y: -7.46, z: 12.62}
+  m_LocalPosition: {x: 1.49, y: 0.46, z: -2.88}
   m_LocalScale: {x: 1.3, y: 1, z: 1.3}
   m_Children:
-  - {fileID: 4527052595742806}
-  - {fileID: 4249741868896064}
+  - {fileID: 4666944526003888}
+  - {fileID: 4943205430250568}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23838131320740794
+--- !u!4 &4943205430250568
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1361864644642388}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.09, y: -0.069, z: -0.072}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4885424230484166}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23756378752219790
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448705951861802}
+  m_GameObject: {fileID: 1361864644642388}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -116,8 +116,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: b71456b793ab99341a384b0a1a97aa15, type: 2}
-  - {fileID: 2100000, guid: 085e5a8a75752a24e8c73b4fbcd274df, type: 2}
+  - {fileID: 2100000, guid: 32fe5c14840d22346b4eaab5d66d24c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,37 +136,35 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33444328816931652
+--- !u!33 &33923580781690504
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448705951861802}
-  m_Mesh: {fileID: 4300000, guid: f37b580c483618846a972d18093ef99a, type: 3}
---- !u!65 &65239289140895960
+  m_GameObject: {fileID: 1361864644642388}
+  m_Mesh: {fileID: 4300000, guid: 65015730ea400c54796f9307a77978d1, type: 3}
+--- !u!65 &65563461067412464
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1645992316065380}
+  m_GameObject: {fileID: 1578503021269540}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114490890586307420
+--- !u!114 &114701209461180834
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1645992316065380}
+  m_GameObject: {fileID: 1578503021269540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb7fc0ac539e69d4994440e9bc2784c7, type: 3}
+  m_Script: {fileID: 11500000, guid: aa5c1fa5da9c27045905d8668ce28858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectOnDesk: {fileID: 0}
-  DeskTransform: {fileID: 4527052595742806}
-  dyeResource: {fileID: 114866039725920914, guid: 35342187692d5b745b4d310bd8213251,
-    type: 2}
+  DeskTransform: {fileID: 4666944526003888}

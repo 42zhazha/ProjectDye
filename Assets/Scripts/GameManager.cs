@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null)
             Destroy(Instance.gameObject);
-        level = 0;
+        level = 1;
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }

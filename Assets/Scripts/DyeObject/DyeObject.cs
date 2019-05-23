@@ -28,12 +28,12 @@ public class DyeObject : MonoBehaviour
     public bool IsProcessFinish { get { return processValue >= 1; } }
 
     public bool CanChop = false;
-    public bool Chop(int playerId )
+    public bool Chop(int playerId)
     {
         if (IsProcessFinish)
             return false;
         if (processValue == 0)
-            logData.Add(new LogPackage( playerId,"Chop"));
+            logData.Add(new LogPackage(playerId, "Chop"));
         processValue += Time.deltaTime;
         return true;
     }
@@ -43,7 +43,7 @@ public class DyeObject : MonoBehaviour
     {
         if (IsProcessFinish)
             return false;
-        if (processValue == 0 )
+        if (processValue == 0)
             logData.Add(new LogPackage(playerId, "Pestling"));
         processValue += Time.deltaTime;
         return true;
@@ -111,4 +111,6 @@ public class DyeObject : MonoBehaviour
             rigidbody.isKinematic = false;
         }
     }
+
+
 }
