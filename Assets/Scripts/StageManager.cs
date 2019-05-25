@@ -143,6 +143,7 @@ public class StageManager : MonoBehaviour
         else
         {
             //送錯菜單
+            currectCustomer.OnTip();
         }
     }
 

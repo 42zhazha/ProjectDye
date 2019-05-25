@@ -7,12 +7,18 @@ public class Tool_ChoppingBoard : ToolTable
 {
     public override bool Work(int playerId)
     {
-        
+
         if (ObjectOnDesk.CanChop && ObjectOnDesk.Chop(playerId))
         {
             ObjectOnDesk.Pestling(playerId);
             return true;
         }
-        return false;
+        if (ObjectOnDesk.CanChop == false)
+        {
+            ObjectOnDesk.OnTip();
+        }
+
+            return false;
+        
     }
 }

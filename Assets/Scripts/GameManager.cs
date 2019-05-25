@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
     public int level;
     public System.Action<int> OnAddPlayer;
     public bool[] isConnects = new bool[2] { false, false };
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null)
             Destroy(Instance.gameObject);
-        level = 1;
+        level = 0;
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }

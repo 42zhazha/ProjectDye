@@ -81,7 +81,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1686669911003232
 GameObject:
   m_ObjectHideFlags: 1
@@ -182,7 +182,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &65493076200968848
 BoxCollider:
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c77febd5555184ca05a809a2e16223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logData: []
   UIRectTransform: {fileID: 224338783672616770}
   fillImage: {fileID: 114405170789974924}
   type: 100
@@ -319,6 +320,7 @@ MonoBehaviour:
   CanPestled: 0
   collider: {fileID: 65493076200968848}
   rigidbody: {fileID: 54900301467863740}
+  tip: {fileID: 0}
 --- !u!222 &222004090659895636
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -350,7 +352,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1680592007
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224237037886635506

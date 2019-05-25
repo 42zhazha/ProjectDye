@@ -32,7 +32,7 @@ public class ScoreUI : Windows
         if (countdown == 0)
             SceneManager.LoadScene("Init");
         else
-            replayText.text = "按下A鍵繼續(" + countdown.ToString() + ")";
+            replayText.text = "按下2號鍵繼續(" + countdown.ToString() + ")";
     }
 
     void Update()

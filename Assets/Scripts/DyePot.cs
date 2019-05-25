@@ -101,8 +101,10 @@ public class DyePot : DyeObject
         if (cuisines.Count >= 4)
             return false;
         if (dye.IsProcessFinish == false)
+        {
+            dye.OnTip();
             return false;
-
+        }
         if (dye.type == DyeType.Cloth)
         {
             clothPoint.SetActive(true);

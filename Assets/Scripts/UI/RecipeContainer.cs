@@ -64,6 +64,7 @@ public class CuisineData
     }
 
     static Dictionary<string, DyeType[]> formulaDict = new Dictionary<string, DyeType[]>(){
+                    {"Cloth", new DyeType[]{ DyeType.Cloth} },
             {"Yellow", new DyeType[]{ DyeType.Cloth, DyeType.Yellow} },
             {"Blue", new DyeType[]{ DyeType.Cloth, DyeType.Blue} },
             {"Red", new DyeType[]{ DyeType.Cloth, DyeType.Red} },

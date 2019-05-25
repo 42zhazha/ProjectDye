@@ -11,4 +11,6 @@ public class RedDye : DyeObject
         renderObject[0].SetActive(IsProcessFinish == false);
         renderObject[1].SetActive(IsProcessFinish == true);
     }
+
+
 }

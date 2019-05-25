@@ -182,7 +182,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &65493076200968848
 BoxCollider:
@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c77febd5555184ca05a809a2e16223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logData: []
   UIRectTransform: {fileID: 224522918323396636}
   fillImage: {fileID: 114503469584722450}
   type: 1

@@ -11,6 +11,12 @@ public class Tool_Pestle : ToolTable
         {
             return true;
         }
+
+        if (ObjectOnDesk.CanPestled == false)
+        {
+            ObjectOnDesk.OnTip();
+        }
         return false;
+
     }
 }

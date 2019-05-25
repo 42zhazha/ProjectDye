@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public enum DyeType : int
 {
 
@@ -78,6 +78,12 @@ public class DyeObject : MonoBehaviour
                 UIRectTransform.gameObject.SetActive(false);
             }
         }
+        if (tip != null && tip.activeSelf)
+        {
+            Vector3 target = Camera.main.transform.position;
+            target.x = transform.position.x;
+            tip.transform.LookAt(target);
+        }
     }
 
     virtual protected void Awake()
@@ -111,6 +117,26 @@ public class DyeObject : MonoBehaviour
             rigidbody.isKinematic = false;
         }
     }
+
+    [SerializeField] GameObject tip;
+    virtual public void OnTip()
+    {
+        if (tip != null)
+        {
+            tip.SetActive(true);
+            tip.transform.localScale = Vector3.one;
+            tip.transform.DOKill();
+            tip.transform.DOShakeScale(0.175f, 1f);
+            CancelInvoke("CloseTip");
+            Invoke("CloseTip", 3);
+        }
+    }
+
+    virtual protected void CloseTip()
+    {
+        tip.SetActive(false);
+    }
+
 
 
 }

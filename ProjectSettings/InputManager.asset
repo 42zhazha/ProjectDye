@@ -35,7 +35,7 @@ InputManager:
     snap: 1
     invert: 1
     type: 2
-    axis: 1
+    axis: 4
     joyNum: 1
   - serializedVersion: 3
     m_Name: Player1Horizontal
@@ -74,7 +74,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 1 button 0
+    positiveButton: joystick 1 button 2
     altNegativeButton: 
     altPositiveButton: n
     gravity: 1000
@@ -147,7 +147,7 @@ InputManager:
     snap: 1
     invert: 1
     type: 2
-    axis: 1
+    axis: 4
     joyNum: 2
   - serializedVersion: 3
     m_Name: Player2Horizontal
@@ -186,7 +186,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 2 button 0
+    positiveButton: joystick 2 button 2
     altNegativeButton: 
     altPositiveButton: 1
     gravity: 1000
