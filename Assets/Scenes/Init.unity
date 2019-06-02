@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a73629a004550240a3491f3be7e4b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 4
   isConnects: 0000
 --- !u!4 &937474431
 Transform:

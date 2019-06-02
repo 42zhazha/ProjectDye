@@ -26,8 +26,9 @@ public class ScoreUI : Windows
             obj.GetComponent<Image>().sprite = Resources.Load<Sprite>("Logo/Recipe/" + cloths[i]);
             obj.transform.SetParent(iconPoint);
         }
+
         float offset = time - (new float[5] { 130f, 200f, 230f, 260f, 290f }[GameManager.Instance.level - 1]);
-        print(offset);
+        PlayerPrefs.SetFloat(GameManager.Instance.level.ToString(), offset);
         if (offset < 5)
         {
             //A+

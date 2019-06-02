@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("IsMove", true);
             Vector3 targerPosition = transform.position + new Vector3(x, 0, y);
-            rigidbody.MovePosition(Vector3.MoveTowards(transform.position, targerPosition, speed * Time.deltaTime));
+            rigidbody.MovePosition(Vector3.MoveTowards(rigidbody.position, targerPosition, speed * Time.deltaTime));
             transform.LookAt(targerPosition, Vector3.up);
         }
     }

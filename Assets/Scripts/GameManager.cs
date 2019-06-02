@@ -32,6 +32,16 @@ public class GameManager : MonoBehaviour
                     OnAddPlayer(i + 1);
             }
         }
+        if (Input.GetKeyDown(KeyCode.F1))
+            LoadScene(1);
+        if (Input.GetKeyDown(KeyCode.F2))
+            LoadScene(2);
+        if (Input.GetKeyDown(KeyCode.F3))
+            LoadScene(3);
+        if (Input.GetKeyDown(KeyCode.F4))
+            LoadScene(4);
+        if (Input.GetKeyDown(KeyCode.F5))
+            LoadScene(5);
     }
 
     public void Replay()
@@ -52,6 +62,12 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Stage" + level.ToString());
             SceneManager.LoadScene("UI", LoadSceneMode.Additive);
         }
+    }
+    public void LoadScene(int level)
+    {
+        this.level = level;
+        SceneManager.LoadScene("Stage" + level.ToString());
+        SceneManager.LoadScene("UI", LoadSceneMode.Additive);
     }
 
 }
