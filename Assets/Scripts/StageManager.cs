@@ -9,7 +9,8 @@ using UnityStandardAssets.ImageEffects;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] CookTutorialWindow cookTutorialWindow;
-    [SerializeField] CheckScoreWindow tipUI;
+    [SerializeField] CheckScoreWindow checkScoreWindow;
+    [SerializeField] TipUI tipUI;
     [SerializeField] GameObject[] PlayerStartUI;
 
     int TutorialIndex = 0;
@@ -31,6 +32,7 @@ public class StageManager : MonoBehaviour
         int level = GameManager.Instance.level;
         SetCuisines(GameManager.Instance.level);
         cookTutorialWindow.SetLevel(level);
+        tipUI.SetLevel(level);
     }
 
     private void Update()
@@ -57,11 +59,12 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            tipUI.gameObject.SetActive(Input.GetKey(KeyCode.P));
+            checkScoreWindow.gameObject.SetActive(Input.GetKey(KeyCode.P));
+            tipUI.gameObject.SetActive(Input.GetButton("PlayerSelectButton"));
             for (int i = 0; i < isConnects.Length; i++)
             {
                 PlayerStartUI[i].SetActive(!isConnects[i]);
-           }
+            }
         }
 
     }

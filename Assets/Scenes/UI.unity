@@ -22424,7 +22424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cookTutorialWindow: {fileID: 526177099}
-  tipUI: {fileID: 1898778110}
+  checkScoreWindow: {fileID: 1898778110}
+  tipUI: {fileID: 1282796701}
   PlayerStartUI:
   - {fileID: 1170788589}
   - {fileID: 1211005185}
