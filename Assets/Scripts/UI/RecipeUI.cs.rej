@@ -1,0 +1,13 @@
+diff a/Assets/Scripts/UI/RecipeUI.cs b/Assets/Scripts/UI/RecipeUI.cs	(rejected hunks)
+@@ -12,11 +12,5 @@
+         this.cuisine = data;
+         headImage.sprite = Resources.Load<Sprite>("Logo/Recipe/Color/" + this.cuisine.name);
+         recipeImage.sprite = Resources.Load<Sprite>("Logo/Recipe/" + this.cuisine.name);
+-        {
+-            GameObject obj = new GameObject("Resources", typeof(Image),typeof(Outline));
+-            obj.transform.SetParent(resourcesTransform);
+-            obj.transform.localScale = Vector3.one;
+-            obj.GetComponent<Image>().sprite = Resources.Load<Sprite>("Logo/Resources/" + this.cuisine.formula[i]);
+-        }
+     }
+ }

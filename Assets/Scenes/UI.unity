@@ -6403,7 +6403,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 205c6c748b85a5941b4e0f1148154179, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 152bd9e4fa926b34bb965bb833a565a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -9706,7 +9706,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6309\u4E0B3\u865F\u9375\u91CD\u65B0\u958B\u59CB"
+  m_Text: "\u6309\u4E0BB\u9375\u91CD\u65B0\u958B\u59CB"
 --- !u!222 &830145933
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16036,7 +16036,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6309\u4E0B2\u865F\u9375\u7E7C\u7E8C"
+  m_Text: "\u6309\u4E0BA\u9375\u7E7C\u7E8C"
 --- !u!222 &1353858356
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16932,7 +16932,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6309\u4E0B2\u865F\u9375\u7E7C\u7E8C"
+  m_Text: "\u6309\u4E0BA\u865F\u9375\u7E7C\u7E8C"
 --- !u!222 &1411691084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22755,7 +22755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898778110
